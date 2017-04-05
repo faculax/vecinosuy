@@ -1,0 +1,22 @@
+﻿<form  ><!--ng-submit="addProvider()"-->
+    <br />
+    <br />
+    <div class="form-group">
+        <label for="userName" class="col-sm-2 control-label">Nombre</label>
+        <div class="col-sm-10">
+            <input type="text" ng-model="userName" class="form-control" id="nameUser" placeholder="Nombre de usuario" />            
+        </div>
+    </div>    
+    <div class="form-group">
+        <label for="contrasena" class="col-sm-2 control-label">Contraseña</label>
+        <div class="col-sm-10">
+            <input type="password" ng-model="contrasena" class="form-control" id="passUser" placeholder="Contraseña" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="administrador" class="col-sm-2 control-label">Administrador</label>
+        <div class="col-sm-10">            
+            <input value="y" type="checkbox" name="admin" ng-model="admin" class="form-control" id="admUser" placeholder="Administrador" />
+        </div>
+    </div>
+</form>

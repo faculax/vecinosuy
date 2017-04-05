@@ -1,0 +1,27 @@
+<br />
+<br />
+<br />
+<h3>Trabajar con Clientes</h3>
+<table class="table movietable">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Nombre</td>
+            <td>Documento</td>
+            <td>Direccion</td>
+            <td>Puntos</td>
+        </tr>
+    </thead>
+    <tr ng-repeat="client in greeting">
+        <td>{{client.ClientId}}</td>
+        <td>{{client.Name}}</td>
+        <td>{{client.Documento}}</td>        
+        <td>{{client.Direccion}}</td>        
+        <td>{{client.Puntos}}</td>                
+        <td>
+            <a class="btn btn-primary" href="#viewClient/{{client.ClientId}}">Modificar</a>
+            <a class="btn btn-danger" ng-click="deleteClient(client)">Borrar</a>
+        </td>
+    </tr>
+</table>
+<a href="#newClient" class="btn-primary btn-lg nodecoration">Agregar Cliente</a>

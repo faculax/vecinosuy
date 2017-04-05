@@ -1,0 +1,21 @@
+<br/>
+<br />
+<br />
+<h3>Trabajar con Usuarios</h3>
+<table class="table movietable">
+    <thead>
+        <tr>
+            <td>Id de usuario</td>
+            <td>Nombre</td>
+        </tr>
+    </thead>
+    <tr ng-repeat="user in greeting">
+        <td>{{user.UserId}}</td>
+        <td>{{user.Name}}</td>        
+        <td>
+            <a class="btn btn-primary" href="#viewUser/{{user.UserId}}">Modificar</a>
+            <a class="btn btn-danger" ng-click="deleteUser(user)">Borrar</a>
+        </td>
+    </tr>
+</table>
+<a href="#newUser" class="btn-primary btn-lg nodecoration">Agregar usuario</a>

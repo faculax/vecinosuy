@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html >
+	<head>
+		<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+		<script type="text/javascript" src="js/jquery-2.0.3.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<!--<script src="D:\Repositorios\Diseno_2\Tresana_Clase_10\Tresana\Tresana.Web.Api\lib\angular.min.js"></script>-->
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular-resource.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+		<link href="css/TodoPagos.css" rel="stylesheet" type="text/css"/>		
+		<script type="text/javascript" src="js/TodoPagos.js"></script>		
+		<title>TodoPagos</title>
+	</head>
+	<body ng-app="TodoPagos">
+		<div id="divMenu" class="header">
+			<div id="nav" >
+				<ul class="nav">
+					<li><a onclick="mostrarDiv('divInicio')">Inicio</a></li>
+					<li><a onclick="mostrarDiv('divUsuarios')">Usuarios</a>
+					<li><a onclick="mostrarDiv('divProveedores')">Proveedores</a>							
+						<li><a>Pagos</a>
+							<ul>
+								<li><a onclick="mostrarDiv('divPago')">Ingresar Pago</a></li>
+								<li>
+								<li><a>Consultas</a>
+									<ul>
+										<li><a onclick="mostrarDiv('divGan')">Ganancias</a></li>
+										<li><a onclick="mostrarDiv('divGanProv')">Ganancias por proveedor</a></li>
+									</ul>					
+								</li>				
+							</ul>					
+						</li>
+						<li><a href="#hola">hola</a></li>							
+					</li>					
+					<li><a><span><img   class="imgLogin" src="./imgs/login.png"><label  id="usuarioLog" class="labelUsu"></label></span></a>
+					<li><a onclick="desloguear()">Salir</a></li>
+				</ul>			
+			</div>		
+		</div>	
+		<div id="divLogin" class="GeneralContainer" ng-controller="UserLogin" align="center">
+		  <form id="frmLogin" ng-submit="login()">
+			  <div class="imgcontainer">
+				<img src="./imgs/img_Login.png" alt="Avatar" class="avatar">
+			  </div>
+
+			  <div class="container">
+					<label><b>Usuario</b></label>
+					<input id="id" type="text" placeholder="Ingrese Número de usuario TodoPagos" name="uname" required>
+
+					<label><b>Password</b></label>
+					<input id="pass" type="password" placeholder="Ingrese contraseña" name="psw" required>								
+					<input id="login" type="submit" value="login" >
+				<!--<p>Usuario Logueado: {{greeting.Name}}</p>-->
+					<p class="errorLogin" >{{greeting.Message}}</p>
+			  </div>		 
+			</form>
+		</div>		
+		<div id="divInicio">
+			<p>home de TODOPAGOS</p>
+		</div>
+		<div ng-view></div>
+		<div id="divProveedores" class="GeneralContainer" ng-controller="Provider" align="center">
+			<div>
+				<form id="frmProveedores" ng-submit="proveedor()">
+					<input id="prov" type="submit" value="proveedor" >
+					<div id="divProveedores" class="GeneralContainer" ng-controller="Provider" align="center">
+						<div ng-repeat="provider in ProvCtrl.tasks">
+				        	<h2>Nombre: {{provider.ProviderName}}</h2>
+				        	<p>Id: {{provider.ProviderId}}</p>
+				        	<p>Nombre: {{provider.ProviderName}}</p>
+				        	<p>Porcentaje: {{provider.Porcentaje}}</p>        
+			    		</div>
+					</div>		
+				</form>
+			</div>
+		</div>		
+	</body>
+</html>

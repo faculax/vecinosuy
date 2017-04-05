@@ -1,0 +1,2 @@
+prodTxt1;prodTxtDesc1;100;500
+prodTxt2;prodTxtDesc2;100;500

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Productos>
+   <Producto Nombre="producto 1">
+      <Descripcion>texto1</Descripcion>
+      <CantidadPuntos>2</CantidadPuntos>
+      <Stock>2</Stock>
+   </Producto>
+   <Producto Nombre="producto 1">
+      <Descripcion>texto2</Descripcion>
+      <CantidadPuntos>100</CantidadPuntos>
+      <Stock>10</Stock>
+   </Producto>
+</Productos>

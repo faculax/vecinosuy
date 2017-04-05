@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5432131F-834D-4F09-A36F-289902B107E4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VecinosUY.Factory</RootNamespace>
+    <AssemblyName>VecinosUY.Factory</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SystemFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VecinosUY.Data.DataAccess\VecinosUY.Data.DataAccess.csproj">
+      <Project>{4f2d4b2e-eb6f-4975-9573-e44b0326b141}</Project>
+      <Name>VecinosUY.Data.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VecinosUY.Logger\VecinosUY.Logger.csproj">
+      <Project>{8D97FAED-68EF-4BFC-A30C-1D030F4D4447}</Project>
+      <Name>VecinosUY.Logger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VecinosUY.Logic\VecinosUY.Logic.csproj">
+      <Project>{3ec6eb92-a5ab-4a18-b574-649e12700d12}</Project>
+      <Name>VecinosUY.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VecinosUY.PlainTextLogger\VecinosUY.PlainTextLogger.csproj">
+      <Project>{29bd820f-dbe1-4737-b0a1-71bb0283fe1e}</Project>
+      <Name>VecinosUY.PlainTextLogger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VecinosUY.Repository\VecinosUY.Repository.csproj">
+      <Project>{fbce39d1-3374-466d-958d-2a9b3dac6db9}</Project>
+      <Name>VecinosUY.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

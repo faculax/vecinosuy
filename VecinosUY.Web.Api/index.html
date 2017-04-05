@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+    <script type="text/javascript" src="lib/jquery-1.9.1.js"></script>
+    <script src="lib/angular.min.js"></script>    
+    <script src="lib/angular-route.js"></script>
+    <script src="lib/angular-resource.min.js"></script>  
+    <script src="Scripts/angular-messages.js"></script>
+    <link href="Content/VecinosUY.css" rel="stylesheet" type="text/css" />    
+    <link href="Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="Scripts/VecinosUY.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-cookies.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.2.0.js"></script>    
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <title>VecinosUY</title>
+</head>
+<body ng-app="VecinosUY">
+    <div id="divMenu" class="header">
+        <div id="nav">
+            <ul class="nav">
+                <li><a  href="#home" >Inicio</a></li>
+                <li><a href="#allUsers" onclick="viewDiv('divUsuarios')">Usuarios</a></li>
+
+                <li><a><span><img class="imgLogin" src="./imgs/login.png"><label id="usuarioLog" class="labelUsu"></label></span></a>
+                    <ul>
+                        <li><a href="#pepe" onclick="logout()">Salir</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="divLogin" class="GeneralContainer" ng-controller="UserLogin" align="center">
+        <form id="frmLogin" ng-submit="login()">
+            <div class="imgcontainer">
+                <img src="./imgs/img_Login.png" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="container">
+                <label><b>Usuario</b></label>
+                <input id="id" type="text" placeholder="Ingrese Número de usuario VecinosUY" name="uname" required>
+                <br/>
+                <label><b>Password</b></label>
+                <input id="pass" type="password" placeholder="Ingrese contraseña" name="psw" required>
+                <br />
+                <input id="login" type="submit" value="login">                
+                <p class="errorLogin">{{greeting.Message}}</p>
+            </div>
+        </form>
+    </div>
+    <div id="divInicio">
+        <h1>Bienvenido a la pagina de administradores de VecinosUY</h1>
+
+    </div>
+    <div id="container" class="container">
+        <div class="row top-buffer">
+            <div class="col-xs-10">
+                <div ng-view></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
