@@ -253,4 +253,3 @@ paket-files/
 
 *.config
 VecinosUY.Data.DataAccess/Migrations/*
-VecinosUY.Data.DataAccess.csproj
