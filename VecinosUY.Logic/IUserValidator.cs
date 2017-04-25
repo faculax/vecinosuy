@@ -17,11 +17,11 @@ namespace VecinosUY.Logic
     {
         
         IEnumerable<User> GetUsers();
-        User LogIn(int userId, string pass);
-        User GetUser(int id);
-        User PutUser(int userId, User user);
+        User LogIn(string userId, string pass);
+        User GetUser(string id);
+        User PutUser(string userId, User user);
         void PostUser(User user);
-        void DeleteUser(int userId);
+        void DeleteUser(string userId);
 
         void secure(HttpRequestMessage request);
 
