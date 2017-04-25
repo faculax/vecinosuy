@@ -14,7 +14,7 @@ namespace VecinosUY.Security
 {
     public class Security
     {
-        public static int logedUserId { get; set; }
+        public static string logedUserId { get; set; }
         public static void secure(HttpRequestMessage request) {
             User usr = getUserLoged(request);
             if (!usr.Admin)
@@ -39,7 +39,7 @@ namespace VecinosUY.Security
             {
                 throw new NotExistException("no logueado");
             }
-            User usr = db.Users.Find(Convert.ToInt32(token.FirstOrDefault()));
+            User usr = db.Users.Find(token.FirstOrDefault());
             if (usr == null)
             {
                 throw new NotExistException("tocken incorrecto");

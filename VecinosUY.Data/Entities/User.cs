@@ -10,7 +10,7 @@ namespace VecinosUY.Data.Entities
     public class User 
     {
         [Key]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

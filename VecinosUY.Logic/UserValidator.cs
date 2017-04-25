@@ -27,7 +27,7 @@ namespace VecinosUY.Logic
         }
 
 
-        public User LogIn(int userId, string pass)
+        public User LogIn(string userId, string pass)
         {            
             User user = unitOfWork.UserRepository.GetByID(userId);
             if (user != null) {
@@ -40,7 +40,7 @@ namespace VecinosUY.Logic
             throw new NotExistException("El usuario especificado no existe o su contraseña es incorrecta");
         }
 
-        public User GetUser(int id)
+        public User GetUser(string id)
         {
             User user = null;
             user = unitOfWork.UserRepository.GetByID(id);            
@@ -55,7 +55,7 @@ namespace VecinosUY.Logic
             return user;
         }
 
-        public User PutUser(int userId, User user)
+        public User PutUser(string userId, User user)
         {
             user.UserId = userId;         
             User oldUser = GetUser(userId);            
@@ -85,7 +85,7 @@ namespace VecinosUY.Logic
         }
 
 
-        public void DeleteUser(int userId)
+        public void DeleteUser(string userId)
         {
             User user = GetUser(userId);
             if (user != null)

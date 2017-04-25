@@ -28,7 +28,7 @@ namespace VecinosUY.Web.Api.Controllers
         [ResponseType(typeof(User))]
         [HttpGet]
         [Route("api/users/{userId}/login/{pass}")]
-        public IHttpActionResult LogIn(int userId, string pass)
+        public IHttpActionResult LogIn(string userId, string pass)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace VecinosUY.Web.Api.Controllers
         [ResponseType(typeof(UserDTO))]
         [HttpGet]
         [Route("api/users/{id}")]
-        public IHttpActionResult GetUser(int id)
+        public IHttpActionResult GetUser(string id)
         {
             try
             {
@@ -128,7 +128,7 @@ namespace VecinosUY.Web.Api.Controllers
         [ResponseType(typeof(void))]
         [HttpPut]
         [Route("api/users/{userId}")]
-        public IHttpActionResult PutUser(int userId, [FromBody] User user)
+        public IHttpActionResult PutUser(string userId, [FromBody] User user)
         {
             if (!ModelState.IsValid)
             {
@@ -170,7 +170,8 @@ namespace VecinosUY.Web.Api.Controllers
             }
             try
             {
-      //          userValidator.secure(Request);
+                //          userValidator.secure(Request);
+                user.UserId = user.Name;
                 userValidator.PostUser(user);
             }
             catch (NotAdminException exception)
@@ -196,7 +197,7 @@ namespace VecinosUY.Web.Api.Controllers
         [ResponseType(typeof(void))]
         [HttpDelete]
         [Route("api/users/{userId}")]
-        public IHttpActionResult DeleteUser(int userId)
+        public IHttpActionResult DeleteUser(string userId)
         {
             try
             {

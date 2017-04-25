@@ -9,7 +9,7 @@ namespace VecinosUY.Data.Entities
 {
     public class UserDTO 
     {
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public string Name { get; set; }
         public Boolean Admin { get; set; }
         public Boolean Deleted { get; set; }
