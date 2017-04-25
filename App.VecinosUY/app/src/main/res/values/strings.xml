@@ -8,4 +8,5 @@
     <string name="nuevo">Nuevo Juego</string>
     <string name="acerca_de">Acerca De</string>
     <string name="entrar">Entrar</string>
+    <string name="serverAddr">172.20.2.50:45455</string>
 </resources>
