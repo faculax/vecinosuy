@@ -8,5 +8,12 @@
     <string name="nuevo">Nuevo Juego</string>
     <string name="acerca_de">Acerca De</string>
     <string name="entrar">Entrar</string>
-    <string name="serverAddr">172.20.2.50:45455</string>
+    <string name="annauncement">"Anuncios"</string>
+    <string name="meeting">"Reuniones"</string>
+    <string name="vote">"Votaciones"</string>
+    <string name="reserve">"Reserva"</string>
+    <string name="agenda">"Agenda"</string>
+    <string name="vecinosUySessionToken">vecinosUySessionToken</string>
+    <string name="serverAddr">http://192.168.0.110:45455/api/</string>
+
 </resources>

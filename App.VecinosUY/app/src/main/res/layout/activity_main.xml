@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/fondo" android:layout_height="fill_parent"
+    android:layout_width="fill_parent" android:padding="30dip"
+    android:orientation="horizontal">
+    <LinearLayout android:orientation="vertical"
+        android:layout_height="wrap_content" android:layout_width="fill_parent"
+        android:layout_gravity="center">
+        <TextView android:id="@+id/helloUser"
+            android:layout_height="wrap_content" android:layout_width="wrap_content"
+            android:layout_gravity="center" android:layout_marginBottom="15dip"
+            android:textSize="24.5sp"  android:text="Hola usuario" />
+<!--        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/vecinos_uy"
+            />-->
+        <Button android:id="@+id/announcementsBtn" android:layout_height="wrap_content" android:layout_width="300dip"
+            android:layout_gravity="center" android:layout_marginBottom="15dip"
+            android:textSize="24.5sp" android:text="@string/annauncement" />
+        <Button android:id="@+id/mtngsBtn" android:layout_height="wrap_content" android:layout_width="300dip"
+            android:layout_gravity="center" android:layout_marginBottom="15dip"
+            android:textSize="24.5sp" android:text="@string/meeting" />
+        <Button android:id="@+id/voteBtn" android:layout_height="wrap_content" android:layout_width="300dip"
+            android:layout_gravity="center" android:layout_marginBottom="15dip"
+            android:textSize="24.5sp" android:text="@string/vote" />
+        <Button android:id="@+id/reserveBtn" android:layout_height="wrap_content" android:layout_width="300dip"
+            android:layout_gravity="center" android:layout_marginBottom="15dip"
+            android:textSize="24.5sp" android:text="@string/reserve" />
+        <Button android:id="@+id/agentaBtn" android:layout_height="wrap_content" android:layout_width="300dip"
+            android:layout_gravity="center" android:layout_marginBottom="15dip"
+            android:textSize="24.5sp" android:text="@string/agenda" />
+    </LinearLayout>
+</LinearLayout>
