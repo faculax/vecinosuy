@@ -18,10 +18,13 @@ namespace VecinosUY.Logic
         
         IEnumerable<User> GetUsers();
         User LogIn(string userId, string pass);
+        User ValidateToken(string userId, string token);
         User GetUser(string id);
         User PutUser(string userId, User user);
         void PostUser(User user);
         void DeleteUser(string userId);
+
+        void DeleteToken(string userId);
 
         void secure(HttpRequestMessage request);
 

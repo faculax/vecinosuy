@@ -65,7 +65,7 @@ namespace VecinosUY.Test
             {
                 new User()
                 {
-                    UserId = 1,
+                    UserId = "1",
                     Name = "luis",
                     Admin = true,
                     Deleted = false,
@@ -73,7 +73,7 @@ namespace VecinosUY.Test
                 },
                 new User()
                 {
-                    UserId = 2,
+                    UserId = "2",
                     Name = "facundo",
                     Admin = true,
                     Deleted = false,
@@ -84,14 +84,14 @@ namespace VecinosUY.Test
                 {
                     new UserDTO()
                     {
-                        UserId = 1,
+                        UserId = "1",
                         Name = "luis",
                         Admin = true,
                         Deleted = false                    
                     },
                     new UserDTO()
                     {
-                        UserId = 2,
+                        UserId = "2",
                         Name = "facundo",
                         Admin = true,
                         Deleted = false
@@ -145,7 +145,7 @@ namespace VecinosUY.Test
 
             User u = new User()
             {
-                UserId = 1,
+                UserId = "1",
                 Name = "luis",
                 Admin = true,
                 Deleted = false,
@@ -153,7 +153,7 @@ namespace VecinosUY.Test
             };
 
             var mockUserValidator = new Mock<IUserValidator>();
-            mockUserValidator.Setup(x => x.GetUser(1)).Returns(u);
+            mockUserValidator.Setup(x => x.GetUser("1")).Returns(u);
             mockUserValidator.Setup(x => x.secure(null)).Verifiable();
             mockUserValidator.Setup(x => x.AtmSecure(null)).Verifiable();
 
@@ -164,7 +164,7 @@ namespace VecinosUY.Test
             controllerContext.Request = request;
             controller.ControllerContext = controllerContext;
 
-            IHttpActionResult actionResult = controller.GetUser(1);
+            IHttpActionResult actionResult = controller.GetUser("1");
             var contentResult = actionResult as OkNegotiatedContentResult<IEnumerable<UserDTO>>;
             Assert.IsNotNull(actionResult);
 
@@ -178,7 +178,7 @@ namespace VecinosUY.Test
 
             User u = new User()
             {
-                UserId = 1,
+                UserId = "1",
                 Name = "luis",
                 Admin = true,
                 Deleted = false,
@@ -186,7 +186,7 @@ namespace VecinosUY.Test
             };
 
             var mockUserValidator = new Mock<IUserValidator>();
-            mockUserValidator.Setup(x => x.LogIn(1,"luis")).Returns(u);
+            mockUserValidator.Setup(x => x.LogIn("1","luis")).Returns(u);
             mockUserValidator.Setup(x => x.secure(null)).Verifiable();
             mockUserValidator.Setup(x => x.AtmSecure(null)).Verifiable();
 
@@ -197,7 +197,7 @@ namespace VecinosUY.Test
             controllerContext.Request = request;
             controller.ControllerContext = controllerContext;
 
-            IHttpActionResult actionResult = controller.LogIn(1, "luis");
+            IHttpActionResult actionResult = controller.LogIn("1", "luis");
             var contentResult = actionResult as OkNegotiatedContentResult<IEnumerable<User>>;
             Assert.IsNotNull(actionResult);
 
@@ -209,7 +209,7 @@ namespace VecinosUY.Test
 
             User u = new User()
             {
-                UserId = 1,
+                UserId = "1",
                 Name = "luis",
                 Admin = true,
                 Deleted = false,
@@ -218,14 +218,14 @@ namespace VecinosUY.Test
 
             UserDTO udto = new UserDTO()
             {
-                UserId = 2,
+                UserId = "2",
                 Name = "facundo",
                 Admin = true,
                 Deleted = false
             };
             
             var mockUserValidator = new Mock<IUserValidator>();
-            mockUserValidator.Setup(x => x.PutUser(1,u)).Returns(u);
+            mockUserValidator.Setup(x => x.PutUser("1",u)).Returns(u);
             mockUserValidator.Setup(x => x.secure(null)).Verifiable();
             mockUserValidator.Setup(x => x.AtmSecure(null)).Verifiable();
 
@@ -236,7 +236,7 @@ namespace VecinosUY.Test
             controllerContext.Request = request;
             controller.ControllerContext = controllerContext;
 
-            IHttpActionResult actionResult = controller.PutUser(1,u);
+            IHttpActionResult actionResult = controller.PutUser("1",u);
             var contentResult = actionResult as OkNegotiatedContentResult<IEnumerable<User>>;
             Assert.IsNotNull(actionResult);
 
@@ -248,7 +248,7 @@ namespace VecinosUY.Test
 
             User u = new User()
             {
-                UserId = 1,
+                UserId = "1",
                 Name = "luis",
                 Admin = true,
                 Deleted = false,
@@ -257,7 +257,7 @@ namespace VecinosUY.Test
 
             UserDTO udto = new UserDTO()
             {
-                UserId = 2,
+                UserId = "2",
                 Name = "facundo",
                 Admin = true,
                 Deleted = false
@@ -287,7 +287,7 @@ namespace VecinosUY.Test
 
             User u = new User()
             {
-                UserId = 1,
+                UserId = "1",
                 Name = "luis",
                 Admin = true,
                 Deleted = false,
@@ -296,14 +296,14 @@ namespace VecinosUY.Test
 
             UserDTO udto = new UserDTO()
             {
-                UserId = 2,
+                UserId = "2",
                 Name = "facundo",
                 Admin = true,
                 Deleted = false
             };
 
             var mockUserValidator = new Mock<IUserValidator>();
-            mockUserValidator.Setup(x => x.DeleteUser(1)).Verifiable();
+            mockUserValidator.Setup(x => x.DeleteUser("1")).Verifiable();
             mockUserValidator.Setup(x => x.secure(null)).Verifiable();
             mockUserValidator.Setup(x => x.AtmSecure(null)).Verifiable();
 
@@ -314,7 +314,7 @@ namespace VecinosUY.Test
             controllerContext.Request = request;
             controller.ControllerContext = controllerContext;
 
-            IHttpActionResult actionResult = controller.DeleteUser(1);
+            IHttpActionResult actionResult = controller.DeleteUser("1");
             var contentResult = actionResult as OkNegotiatedContentResult<IEnumerable<User>>;
             Assert.IsNotNull(actionResult);
 

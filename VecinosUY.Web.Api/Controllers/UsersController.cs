@@ -27,12 +27,38 @@ namespace VecinosUY.Web.Api.Controllers
         }
         [ResponseType(typeof(User))]
         [HttpGet]
-        [Route("api/users/{userId}/login/{pass}")]
-        public IHttpActionResult LogIn(string userId, string pass)
+        [Route("api/users/{userId}/loginUser/{pass}")]
+        public IHttpActionResult LogInUser(string userId, string pass)
         {
             try
             {
                 User user = userValidator.LogIn(userId, pass);
+                if (user.Admin) {
+                    return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "el usuario es admin, los admin no usan la app"));
+                }
+                return Ok(user);
+            }
+            catch (NotExistException exception)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, exception.Mymessage));
+            }
+            catch (Exception exception)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exception.Message));
+            }
+        }
+
+        [ResponseType(typeof(User))]
+        [HttpGet]
+        [Route("api/users/{userId}/loginAdmin/{pass}")]
+        public IHttpActionResult LogInAdmin(string userId, string pass)
+        {
+            try
+            {
+                User user = userValidator.LogIn(userId, pass);
+                if (!user.Admin) {
+                    return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "el user no es admin, solo los admin usan la pagina"));
+                }
                 return Ok(user);
             }
             catch (NotExistException exception)
@@ -68,7 +94,8 @@ namespace VecinosUY.Web.Api.Controllers
                         UserId = item.UserId,
                         Name = item.Name,
                         Admin = item.Admin,
-                        Deleted = item.Deleted
+                        Deleted = item.Deleted,
+                        Token = item.Token
                     };
                     listUserDTO.Add(userDTO);
 
@@ -171,7 +198,6 @@ namespace VecinosUY.Web.Api.Controllers
             try
             {
                 //          userValidator.secure(Request);
-                user.UserId = user.Name;
                 userValidator.PostUser(user);
             }
             catch (NotAdminException exception)
@@ -195,14 +221,43 @@ namespace VecinosUY.Web.Api.Controllers
 
         // DELETE: api/Users/5
         [ResponseType(typeof(void))]
-        [HttpDelete]
-        [Route("api/users/{userId}")]
+        [HttpGet]
+        [Route("api/users/logicDelete/{userId}")]
         public IHttpActionResult DeleteUser(string userId)
         {
             try
             {
                 userValidator.secure(Request);
                 userValidator.DeleteUser(userId);
+            }
+            catch (NotAdminException exception)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, exception.Mymessage));
+            }
+            catch (NotExistException exception)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, exception.Mymessage));
+            }
+            catch (System.Data.SqlClient.SqlException)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "VecinosUY no se puede conectar a la base de datos (∩︵∩)"));
+            }
+            catch (Exception exception)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exception.Message));
+            }
+            return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.OK, "OK"));
+        }
+
+        [ResponseType(typeof(void))]
+        [HttpGet]
+        [Route("api/users/{userId}/deleteToken")]
+        public IHttpActionResult DeleteToken(string userId)
+        {
+            try
+            {
+                userValidator.secure(Request);
+                userValidator.DeleteToken(userId);
             }
             catch (NotAdminException exception)
             {
@@ -231,5 +286,28 @@ namespace VecinosUY.Web.Api.Controllers
             }
             base.Dispose(disposing);
         }
+
+        [ResponseType(typeof(User))]
+        [HttpGet]
+        [Route("api/users/{userId}/validateToken/{token}")]
+        public IHttpActionResult ValidateToken(string userId, string token)
+        {
+            try
+            {
+                User user = userValidator.ValidateToken(userId, token);
+                return Ok(user);
+            }
+            catch (NotExistException exception)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, exception.Mymessage));
+            }
+            catch (Exception exception)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exception.Message));
+            }
+        }
+
     }
+
+
 }

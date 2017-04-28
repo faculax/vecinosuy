@@ -18,8 +18,9 @@ namespace VecinosUY.Data.Entities
         [Required]
         public Boolean Admin { get; set; }
         public Boolean Deleted { get; set; }
-      //  public virtual ICollection<Payment> Payments { get; set; }
-        
+        public string Token { get; set; }
+        //  public virtual ICollection<Payment> Payments { get; set; }
+
 
         public User()
         {

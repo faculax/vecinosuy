@@ -41,7 +41,7 @@ namespace VecinosUY.Logic.Test
             UserValidator userValidator = new UserValidator(mockUnitOfWork.Object);
             //Act
             
-            User returnedUser = userValidator.GetUser(5);
+            User returnedUser = userValidator.GetUser("5");
 
             //Assert
             //mockUnitOfWork.VerifyAll();
@@ -82,7 +82,7 @@ namespace VecinosUY.Logic.Test
             IUserValidator userValidator = new UserValidator(mockUnitOfWork.Object);
 
             //act
-            userValidator.PutUser(0,new User() { });
+            userValidator.PutUser("0",new User() { });
 
             //Assert
             //Retorna exception
@@ -97,7 +97,7 @@ namespace VecinosUY.Logic.Test
                 Admin = true,
                 Deleted = false,
                 Password = "luis",
-                UserId = 1
+                UserId = "1"
             };
             //Arrange 
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -112,7 +112,7 @@ namespace VecinosUY.Logic.Test
             UserValidator userValidator = new UserValidator(mockUnitOfWork.Object);
 
             //act
-            userValidator.PutUser(1,user);
+            userValidator.PutUser("1",user);
 
             //Assert
             mockUnitOfWork.Verify(un => un.UserRepository.Update(It.IsAny<User>()), Times.Exactly(1));

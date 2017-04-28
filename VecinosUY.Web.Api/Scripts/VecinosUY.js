@@ -83,7 +83,7 @@ VecinosUYApp
   	        var ctrl = this;
 		 	var id= $("#id").val();
 			var pass= $("#pass").val();
-          $http.get('Api/users/' + id + '/login/' + pass, { /*params: user */},
+          $http.get('Api/users/' + id + '/loginAdmin/' + pass, { /*params: user */},
             function (response) { 
             	$scope.greeting = response.data; 				
             },
@@ -101,14 +101,38 @@ VecinosUYApp
         });			
       }
   }]).controller('GetUsers', ['$scope', '$http', '$cookies', function ($scope, $http, $cookies) {
+      $scope.deleteToken = function (user) {
+          var name = $("#nameUser").val();
+          var pass = $("#passUser").val();
+          var admin = $("#admUser").val();
+          idLogueado = $cookies.get('idLogueado');
+          var req = {
+              method: 'GET',
+              url: 'Api/Users/' + user.UserId + '/deleteToken',
+              headers: {
+                  'TODO_PAGOS_TOKEN': idLogueado
+              },
+              data: {
+                  "Name": name,
+                  "Password": pass,
+                  "Admin": admin,
+              }
+          }
+          var res = $http(req).then(function success(data, status, headers, config) {
+              alert("Usuario deslogueado correctamente");
+
+          }, function error(data, status, headers, config) {
+              alert("ERROR: " + JSON.stringify({ data: data.data.Message }));
+          })
+      }
       $scope.deleteUser = function (user) {
           var name = $("#nameUser").val();
           var pass = $("#passUser").val();
           var admin = $("#admUser").val();
           idLogueado = $cookies.get('idLogueado');
           var req = {
-              method: 'DELETE',
-              url: 'Api/Users/' + user.UserId,
+              method: 'GET',
+              url: 'Api/Users/logicDelete/' + user.UserId,
               headers: {
                   'TODO_PAGOS_TOKEN': idLogueado
               },
@@ -159,9 +183,11 @@ VecinosUYApp
 
       var res = $http(req).then(function success(data, status, headers, config) {
           $scope.message = data;
+          var userId = data.data.UserId;
           var name = data.data.Name;
           var admin = data.data.Admin;
-          $('#nameUser').val(name);
+          $('#nameUser').val(userId);
+          $('#userEditableName').val(name);
           $('#passUser').val("*****");
           if (admin)
               document.getElementById("admUser").checked = true
@@ -175,7 +201,7 @@ VecinosUYApp
 
       $scope.editUser = function () {
           var idParm = $routeParams.id
-          var name = $("#nameUser").val();
+          var name = $("#userEditableName").val();
           var pass = $("#passUser").val();
           var admin = $("#admUser").prop('checked');
           idLogueado = $cookies.get('idLogueado');
@@ -195,6 +221,7 @@ VecinosUYApp
           var res = $http(req).then(function success(data, status, headers, config) {
               $scope.message = data;
               alert("Usuario modificado correctamente");
+              window.location.href = '/#/allUsers';
           }, function error(data, status, headers, config) {
               alert("ERROR: " + JSON.stringify({ data: data.data.Message }));
           });
@@ -203,6 +230,7 @@ VecinosUYApp
   }]).controller('PostUser', ['$scope', '$http', '$cookies', /*'$rooScope',*/ function ($scope, $http, $cookies/*, $rooScope*/) {
       $scope.addUser = function () {
           var name = $("#nameUser").val();
+          var editableName = $("#userEditableName").val();
           var pass = $("#passUser").val();          
           var admin = $('input:checkbox[name=admin]:checked').val();
           if (admin == "y")
@@ -217,7 +245,8 @@ VecinosUYApp
                   'TODO_PAGOS_TOKEN': idLogueado
               },
               data: {
-                  "Name": name,
+                  "UserId" : name,
+                  "Name": editableName,
                   "Password": pass,
                   "Admin": adminBool,
               }
@@ -226,7 +255,7 @@ VecinosUYApp
           var res = $http(req).then(function success(data, status, headers, config) {
               $scope.message = data;
               alert("Usuario creado correctamente ");
-              //$rootScope.back = { url: '#/allUsers', text: 'allUsers' };
+              window.location.href = '/#/allUsers';
           }, function error(data, status, headers, config) {
               alert("ERROR: " + JSON.stringify({ data: data.data.Message }));
           });

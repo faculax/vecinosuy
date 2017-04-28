@@ -33,12 +33,29 @@ namespace VecinosUY.Logic
             if (user != null) {
                 if (user.Password.Equals(pass))
                 {
-                    unitOfWork.Logger.logg("LOGIN", DateTime.Now, userId + "");                    
+                    unitOfWork.Logger.logg("LOGIN", DateTime.Now, userId + "");
+                    user.Token = "1234";
+                    this.PutUser(userId, user);
                     return user;
                 }                                            
             }            
             throw new NotExistException("El usuario especificado no existe o su contraseña es incorrecta");
         }
+
+        public User ValidateToken(string userId, string token)
+        {
+            User user = unitOfWork.UserRepository.GetByID(userId);
+            if (user != null)
+            {
+                if (user.Token.Equals(token))
+                {
+                    //  unitOfWork.Logger.logg("LOGIN", DateTime.Now, userId + "");
+                    return user;
+                }
+            }
+            throw new NotExistException("El usuario especificado no tiene el token correcto, contacte al admin");
+        }
+
 
         public User GetUser(string id)
         {
@@ -64,6 +81,7 @@ namespace VecinosUY.Logic
                 oldUser.Admin = user.Admin;
                 oldUser.Deleted = user.Deleted;
                 oldUser.Name = user.Name;
+                oldUser.Token = user.Token;
                 if (user.Password != "*****")
                 {
                     oldUser.Password = user.Password;
@@ -100,6 +118,23 @@ namespace VecinosUY.Logic
                 throw new NotExistException("El usuario especificado no existe");
             }
             
+        }
+
+        public void DeleteToken(string userId)
+        {
+            User user = GetUser(userId);
+            if (user != null)
+            {
+                user.Token = "";
+                unitOfWork.UserRepository.Update(user);
+                unitOfWork.Save();
+                //this.PutUser(userId, user);
+            }
+            else
+            {
+                throw new NotExistException("El usuario especificado no existe");
+            }
+
         }
 
         private bool UserExists(int id)

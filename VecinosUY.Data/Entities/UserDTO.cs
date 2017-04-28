@@ -14,6 +14,8 @@ namespace VecinosUY.Data.Entities
         public Boolean Admin { get; set; }
         public Boolean Deleted { get; set; }
 
+        public string Token { get; set; }
+
         public UserDTO() { }
     }
 }
