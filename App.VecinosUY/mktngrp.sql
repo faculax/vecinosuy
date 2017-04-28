@@ -148,7 +148,7 @@ SELECT
       case when (mod_mos.name_kymt = 'Digital Material') then dm.media_asset_id end as digital_material_id,
       case when (mod_mos.name_kymt = 'Digital Material') then dbms_lob.substr(regexp_replace(cfgmat.display_name,'<[^<]*>', ''), dbms_lob.getlength(regexp_replace(cfgmat.display_name,'<[^<]*>', '')), 1) end as digital_material_text
   FROM  calms.scopesequence ss
-  INNER JOIN calms.sstreeview t       ON ss.module_id = t.root_module_id  and ss.scope_seq_id  = 2911
+  INNER JOIN calms.sstreeview t       ON ss.module_id = t.root_module_id  and ss.scope_seq_id  = 2907
   INNER JOIN calms.sstreeview t2      ON t.parent_module_id = t2.module_id AND t.root_module_id = t2.root_module_id 
   left outer JOIN calms.sstreeview t3      ON t2.parent_module_id = t3.module_id AND t2.root_module_id = t3.root_module_id and t3.module_id = t2.parent_module_id
   INNER JOIN calms.xmodulelang course ON ss.module_id = course.module_id
@@ -177,7 +177,7 @@ SELECT
           ct.id,
           actmo.resource_cfg_id
      FROM calms.scopesequence  ss
-    INNER JOIN calms.sstreeview t                ON ss.module_id = t.root_module_id and ss.scope_seq_id = 2911
+    INNER JOIN calms.sstreeview t                ON ss.module_id = t.root_module_id and ss.scope_seq_id = 2907
     inner join calms.ca_mod_view  mact           on t.module_id = mact.module_id
      LEFT JOIN calms.Content_Resource_View actmo        ON (mact.activity_id = actmo.cONtent_id and actmo.content_type_id = 0 AND actmo.resource_cONtent_type_id in (8,14,16,20) )
     INNER JOIN calms.activity act                ON mact.activity_id = act.activity_id
@@ -211,7 +211,7 @@ UNION --activity wrapper
           ct.id,
           actmo.resource_cfg_id 
      FROM calms.scopesequence  ss
-    INNER JOIN calms.sstreeview t                ON ss.module_id = t.root_module_id and ss.scope_seq_id = 2911 
+    INNER JOIN calms.sstreeview t                ON ss.module_id = t.root_module_id and ss.scope_seq_id = 2907 
     inner join calms.xseqnodeadaptivewrapper xsaw  on xsaw.sequence_node_id = t.sequence_node_id
     inner join calms.xadapwraplearnertypeconcept xaw on xaw.adaptive_wrapper_id = xsaw.adaptive_wrapper_id
      LEFT JOIN calms.Content_Resource_View actmo        ON (xaw.concept_id = actmo.cONtent_id and actmo.content_type_id = 0 AND actmo.resource_cONtent_type_id in (8,14,16,20) )
@@ -244,7 +244,7 @@ UNION --activity wrapper
            ct.id,
            testmo.resource_cfg_id
       from calms.scopesequence  ss
-     inner join  calms.sstreeview t                     on ss.module_id = t.root_module_id and ss.scope_seq_id  = 2911
+     inner join  calms.sstreeview t                     on ss.module_id = t.root_module_id and ss.scope_seq_id  = 2907
      inner join  calms.aa_mod_view    mtest             on t.module_id = mtest.module_id
       LEFT JOIN   calms.CONtent_With_Quest_Resrc_View testmo            ON (mtest.assessment_id = testmo.cONtent_id AND testmo.content_type_id = 1 AND testmo.resource_cONtent_type_id in (8,14,16,20))
      INNER JOIN  calms.ASsessment ASmt                  ON mtest.assessment_id = ASmt.assessment_id
@@ -306,7 +306,7 @@ select
     null as digital_material_id,
     null as digital_material_text
     from calms.scopesequence  ss
-    inner join calms.sstreeview t                on ss.module_id = t.parent_module_id and t.concept_type_id = 5 and t.subtype_id = 4  and ss.scope_seq_id  = 2911
+    inner join calms.sstreeview t                on ss.module_id = t.parent_module_id and t.concept_type_id = 5 and t.subtype_id = 4  and ss.scope_seq_id  = 2907
     inner join calms.ca_mod_view  mact           on t.module_id = mact.module_id
     INNER JOIN calms.activity act                ON mact.activity_id = act.activity_id
     inner join calms.xactivitylang xal           on mact.activity_id = xal.activity_id

@@ -75,12 +75,18 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener{
         EditText passwordField   = (EditText)findViewById(R.id.passwordTxt);
         String password = passwordField.getText().toString();
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = serverAddr + possibleEmail + "/login/" + password;
+        String url = serverAddr + possibleEmail + "/loginUser/" + password;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        callMainActivity(response);
+                        JSONObject jsonObj;
+                        String sessionToken = getString(R.string.vecinosUySessionToken);
+                        try {
+                            jsonObj = new JSONObject(response);
+                            sessionToken = jsonObj.getString("Token");
+                        } catch (JSONException e) {}
+                        callMainActivity(response, sessionToken);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -100,18 +106,28 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener{
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        callMainActivity(response);
+                        JSONObject jsonObj;
+                        String token = getResources().getString(R.string.vecinosUySessionToken);
+                        try {
+                            jsonObj = new JSONObject(response);
+                            token = jsonObj.getString("Token");
+                        } catch (JSONException e) {}
+                        callMainActivity(response, token);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                mTxtDisplay.setText("Error de token, contacte al admin");
+                mTxtDisplay.setText("Ha sido deslogueado por el admin, reingrese");
             }
         });
         queue.add(stringRequest);
     }
 
-    private void callMainActivity(String response) {
+    private void callMainActivity(String response, String token) {
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(getString(R.string.vecinosUySessionToken), token);
+        editor.commit();
         JSONObject jsonObj;
         String userName = "usuario";
         try {
@@ -121,6 +137,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener{
         Intent i = new Intent(getApplicationContext(), MainActivity.class);
         Bundle loginMainBoundle = new Bundle();
         loginMainBoundle.putString("userName", userName);
+        loginMainBoundle.putString("token", token);
         i.putExtras(loginMainBoundle);
         startActivity(i);
         finish();
