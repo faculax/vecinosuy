@@ -12,9 +12,9 @@ namespace VecinosUY.Data.Entities
         [Key]
         public string BookingId { get; set; }
         [Required]
-        public User User { get; set; }
+        public string User { get; set; }
         [Required]
-        public Service Service { get; set; }
+        public string Service { get; set; }
 
         [Required]
         public DateTime BookedFrom { get; set; }

@@ -12,6 +12,8 @@ namespace VecinosUY.Data.Repository
         IRepository<Booking> BookingRepository { get; }
         IRepository<FavoriteAdds> FavoriteAddsRepository { get; }
 
+        IRepository<Announcement> AnnouncementRepository { get; }
+
         IRepository<Property> PropertyRepository { get; }
 
         ILogger Logger { get; }

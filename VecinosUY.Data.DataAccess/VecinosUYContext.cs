@@ -10,7 +10,7 @@ namespace VecinosUY.Data.DataAccess
         public DbSet<Service> Services { get; set; }
         public DbSet<Booking> Bookings  { get; set; }
         public DbSet<FavoriteAdds> FavoriteAdds { get; set; }
-
+        public DbSet<Announcement> Announcements { get; set; }
 
         public VecinosUYContext() : base("VecinosUYContext")
         {

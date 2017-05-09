@@ -16,7 +16,7 @@ namespace VecinosUY.Data.Entities
         [Required]
         public string Address { get; set; }
         [Required]
-        public User Admin { get; set; }
+        public string Admin { get; set; }
 
         public Building()
         {

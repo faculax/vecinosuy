@@ -7,18 +7,20 @@ using System.Threading.Tasks;
 
 namespace VecinosUY.Data.Entities
 {
-    public class FavoriteAdds
+    public class Announcement
     {
-        [Key]
-        public string FavoriteAddsId { get; set; }
-        [Required]
-        public string User { get; set; }
-        [Required]
-        
-        //replace "string" for Add Entity once its pulled from the repository
-        public List<string> Adds { get; set; }
 
-        public FavoriteAdds()
+        [Key]
+        public int AnnouncementId { get; set; }
+        [Required]
+        public string Title { get; set; }
+        [Required]
+        public string Body { get; set; }
+        [Required]
+        public Boolean Deleted { get; set; }
+
+
+        public Announcement()
         {
 
         }

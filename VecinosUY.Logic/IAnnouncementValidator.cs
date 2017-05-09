@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,18 +13,14 @@ using System.Net.Http;
 
 namespace VecinosUY.Logic
 {
-    public interface IUserValidator:IDisposable
+    public interface IAnnouncementValidator:IDisposable
     {
         
-        IEnumerable<User> GetUsers();
-        User LogIn(string userId, string pass);
-        User ValidateToken(string userId, string token);
-        User GetUser(string id);
-        User PutUser(string userId, User user);
-        void PostUser(User user);
-        void DeleteUser(string userId);
-
-        void DeleteToken(string userId);
+        IEnumerable<Announcement> GetAnnouncements();
+        Announcement GetAnnouncement(int id);
+        Announcement PutAnnouncement(int id, Announcement announcement);
+        void PostAnnouncement(Announcement announcement);
+        void DeleteAnnouncement(int announcement);
 
         void secure(HttpRequestMessage request);
 

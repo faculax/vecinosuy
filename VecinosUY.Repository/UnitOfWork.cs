@@ -15,6 +15,7 @@ namespace VecinosUY.Data.Repository
     {
         private VecinosUYContext context;
         private GenericRepository<User> userRepository;
+        private GenericRepository<Announcement> announcementRepository;
         private GenericRepository<Property> propertieRepository;
         private GenericRepository<Building> buildingRepository;
         private GenericRepository<Service> serviceRepository;
@@ -37,6 +38,70 @@ namespace VecinosUY.Data.Repository
                     this.userRepository = new GenericRepository<User>(context);
                 }
                 return userRepository;
+            }
+        }
+
+        public IRepository<Building> BuildingRepository
+        {
+            get
+            {
+
+                if (this.buildingRepository == null)
+                {
+                    this.buildingRepository = new GenericRepository<Building>(context);
+                }
+                return buildingRepository;
+            }
+        }
+
+        public IRepository<Service> ServiceRepository
+        {
+            get
+            {
+
+                if (this.serviceRepository == null)
+                {
+                    this.serviceRepository = new GenericRepository<Service>(context);
+                }
+                return serviceRepository;
+            }
+        }
+
+        public IRepository<Booking> BookingRepository
+        {
+            get
+            {
+
+                if (this.bookingRepository == null)
+                {
+                    this.bookingRepository = new GenericRepository<Booking>(context);
+                }
+                return bookingRepository;
+            }
+        }
+
+        public IRepository<FavoriteAdds> FavoriteAddsRepository
+        {
+            get
+            {
+
+                if (this.favoriteAddsRepository == null)
+                {
+                    this.favoriteAddsRepository = new GenericRepository<FavoriteAdds>(context);
+                }
+                return favoriteAddsRepository;
+            }
+        }
+        public IRepository<Announcement> AnnouncementRepository
+        {
+            get
+            {
+
+                if (this.announcementRepository == null)
+                {
+                    this.announcementRepository = new GenericRepository<Announcement>(context);
+                }
+                return announcementRepository;
             }
         }
 

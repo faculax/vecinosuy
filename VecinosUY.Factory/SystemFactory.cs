@@ -18,6 +18,7 @@ namespace VecinosUY.Factory
         private static BuildingValidator buildingValidator;
         private static ServiceValidator serviceValidator;
         private static BookingValidator bookingValidator;
+        private static AnnouncementValidator announcementValidator;
         private static PropertiesValidator propertiesValidator;
         private static ILogger logger;
 
@@ -64,6 +65,7 @@ namespace VecinosUY.Factory
             return buildingValidator;
         }
 
+
         public static ServiceValidator GetServiceValidatorInstance()
         {
             if (serviceValidator == null)
@@ -80,6 +82,14 @@ namespace VecinosUY.Factory
                 bookingValidator = new BookingValidator(GetUnitOfWofkInstance());
             }
             return bookingValidator;
+        }
+        public static AnnouncementValidator GetAnnouncementValidatorInstance()
+        {
+            if (announcementValidator == null)
+            {
+                announcementValidator = new AnnouncementValidator(GetUnitOfWofkInstance());
+            }
+            return announcementValidator;
         }
     }
 }
