@@ -197,7 +197,7 @@ namespace VecinosUY.Test
             controllerContext.Request = request;
             controller.ControllerContext = controllerContext;
 
-            IHttpActionResult actionResult = controller.LogIn("1", "luis");
+            IHttpActionResult actionResult = controller.LogInAdmin("1", "luis");
             var contentResult = actionResult as OkNegotiatedContentResult<IEnumerable<User>>;
             Assert.IsNotNull(actionResult);
 

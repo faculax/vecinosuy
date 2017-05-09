@@ -49,8 +49,10 @@
   <ItemGroup>
     <Compile Include="DependencyResolver.cs" />
     <Compile Include="IPropertiesValidator.cs" />
+    <Compile Include="IAnnouncementValidator.cs" />
     <Compile Include="PropertiesValidator.cs" />
     <Compile Include="IUserValidator.cs" />
+    <Compile Include="AnnouncementValidator.cs" />
     <Compile Include="UserValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

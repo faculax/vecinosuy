@@ -15,6 +15,7 @@ namespace VecinosUY.Data.Repository
     {
         private VecinosUYContext context;
         private GenericRepository<User> userRepository;
+        private GenericRepository<Announcement> announcementRepository;
         private GenericRepository<Property> propertieRepository;
         private ILogger logger;
 
@@ -33,6 +34,19 @@ namespace VecinosUY.Data.Repository
                     this.userRepository = new GenericRepository<User>(context);
                 }
                 return userRepository;
+            }
+        }
+
+        public IRepository<Announcement> AnnouncementRepository
+        {
+            get
+            {
+
+                if (this.announcementRepository == null)
+                {
+                    this.announcementRepository = new GenericRepository<Announcement>(context);
+                }
+                return announcementRepository;
             }
         }
 

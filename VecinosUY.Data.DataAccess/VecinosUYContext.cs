@@ -6,6 +6,7 @@ namespace VecinosUY.Data.DataAccess
     public class VecinosUYContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Announcement> Announcements { get; set; }
 
         public VecinosUYContext() : base("VecinosUYContext")
         {
