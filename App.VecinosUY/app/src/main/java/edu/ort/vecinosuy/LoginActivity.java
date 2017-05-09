@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener{
 
     }
     private void newUserFlow(){
-        String serverAddr = getString(R.string.serverAddr) + "users/";
+        String serverAddr = getResources().getString(R.string.serverAddr) + "users/";
         final TextView mTxtDisplay = (TextView) findViewById(R.id.userMessage);
         EditText passwordField   = (EditText)findViewById(R.id.passwordTxt);
         String password = passwordField.getText().toString();
@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener{
     }
 
     private void validateToken(String token) {
-        String serverAddr = getString(R.string.serverAddr) + "users/";
+        String serverAddr = getResources().getString(R.string.serverAddr) + "users/";
         RequestQueue queue = Volley.newRequestQueue(this);
         final TextView mTxtDisplay = (TextView) findViewById(R.id.userMessage);
         String url = serverAddr + possibleEmail + "/validateToken/" + token;

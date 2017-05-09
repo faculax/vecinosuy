@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">VecinosUY</string>
     <string name="titulo">Login de residentes</string>
+    <string name="announcementsForm">Nuevo anuncio:</string>
     <string name="bienvenido">Bienvenido!</string>
     <string name="ingrese_codigo_de_activacion">Ingrese el codigo de activacion</string>
     <string name="continuar">Continuar</string>
@@ -14,6 +15,9 @@
     <string name="reserve">"Reserva"</string>
     <string name="agenda">"Agenda"</string>
     <string name="vecinosUySessionToken">vecinosUySessionToken</string>
-    <string name="serverAddr">http://192.168.0.110:45455/api/</string>
+    <string name="serverAddr">http://192.168.0.104:45455/api/</string>
+    <string name="title_activity_announcement">AnnouncementActivity</string>
+    <string name="title_activity_to_delete">toDeleteActivity</string>
+    <string name="title_activity_borrar">BORRARActivity</string>
 
 </resources>

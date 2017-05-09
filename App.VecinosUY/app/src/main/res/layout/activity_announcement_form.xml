@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:fillViewport="false">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/fondo" android:layout_height="fill_parent"
+    android:layout_width="fill_parent" android:padding="30dip"
+    android:orientation="horizontal">
+    <LinearLayout android:orientation="vertical"
+        android:layout_height="wrap_content" android:layout_width="fill_parent"
+        android:layout_gravity="center">
+        <TextView android:id="@+id/labelAnnForm"
+            android:layout_height="wrap_content" android:layout_width="wrap_content"
+            android:layout_gravity="center" android:layout_marginBottom="25dip"
+            android:textSize="24.5sp"  android:text="@string/announcementsForm" />
+        <EditText
+
+            android:id="@+id/titleTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Titulo"/>
+        <EditText
+
+            android:id="@+id/bodyTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cuerpo"/>
+
+        <Button android:id="@+id/photoBtn" android:layout_height="wrap_content" android:layout_width="wrap_content"
+            android:layout_gravity="center" android:layout_marginBottom="25dip"
+            android:textSize="24.5sp" android:text="Agregar foto" />
+        <ImageView
+            android:id="@+id/annImgView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <Button android:id="@+id/submitBtn" android:layout_height="wrap_content" android:layout_width="wrap_content"
+            android:layout_gravity="center" android:layout_marginBottom="25dip"
+            android:textSize="24.5sp" android:text="Anunciar" />
+    </LinearLayout>
+</LinearLayout>
+</ScrollView>
