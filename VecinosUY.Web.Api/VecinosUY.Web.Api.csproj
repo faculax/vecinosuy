@@ -125,10 +125,10 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\VecinosUY.css" />
     <Content Include="Global.asax" />
-    <Content Include="imgs\error.jpg" />
-    <Content Include="imgs\img_Login.png" />
-    <Content Include="imgs\login.png" />
-    <Content Include="imgs\ok.jpg" />
+    <Content Include="Controllers\imgs\error.jpg" />
+    <Content Include="Controllers\imgs\img_Login.png" />
+    <Content Include="Controllers\imgs\login.png" />
+    <Content Include="Controllers\imgs\ok.jpg" />
     <Content Include="index.html" />
     <Content Include="lib\angular-mocks.js" />
     <Content Include="lib\angular-resource.min.js" />
@@ -137,7 +137,7 @@
     <Content Include="lib\angular.min.js" />
     <Content Include="lib\bootstrap.js" />
     <Content Include="lib\bootstrap.min.js" />
-    <Content Include="imgs\login2png" />
+    <Content Include="Controllers\imgs\login2png" />
     <None Include="lib\jquery-1.9.1.intellisense.js" />
     <Content Include="lib\jquery-1.9.1.js" />
     <Content Include="lib\jquery-1.9.1.min.js" />
@@ -168,6 +168,9 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BookingsController.cs" />
+    <Compile Include="Controllers\BuildingsController.cs" />
+    <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

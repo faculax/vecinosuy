@@ -6,6 +6,11 @@ namespace VecinosUY.Data.DataAccess
     public class VecinosUYContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Building> Buildings { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<Booking> Bookings  { get; set; }
+        public DbSet<FavoriteAdds> FavoriteAdds { get; set; }
+
 
         public VecinosUYContext() : base("VecinosUYContext")
         {

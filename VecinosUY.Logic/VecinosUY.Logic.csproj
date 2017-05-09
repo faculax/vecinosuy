@@ -47,10 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BookingValidator.cs" />
+    <Compile Include="BuildingValidator.cs" />
     <Compile Include="DependencyResolver.cs" />
+    <Compile Include="IBookingValidator.cs" />
+    <Compile Include="IBuildingValidator.cs" />
     <Compile Include="IPropertiesValidator.cs" />
+    <Compile Include="IServiceValidator.cs" />
     <Compile Include="PropertiesValidator.cs" />
     <Compile Include="IUserValidator.cs" />
+    <Compile Include="ServiceValidator.cs" />
     <Compile Include="UserValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

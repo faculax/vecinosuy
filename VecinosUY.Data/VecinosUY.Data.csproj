@@ -49,7 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Booking.cs" />
+    <Compile Include="Entities\Building.cs" />
+    <Compile Include="Entities\FavoriteAdds.cs" />
     <Compile Include="Entities\Property.cs" />
+    <Compile Include="Entities\Service.cs" />
     <Compile Include="Entities\UserDTO.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -16,6 +16,10 @@ namespace VecinosUY.Data.Repository
         private VecinosUYContext context;
         private GenericRepository<User> userRepository;
         private GenericRepository<Property> propertieRepository;
+        private GenericRepository<Building> buildingRepository;
+        private GenericRepository<Service> serviceRepository;
+        private GenericRepository<Booking> bookingRepository;
+        private GenericRepository<FavoriteAdds> favoriteAddsRepository;
         private ILogger logger;
 
         public UnitOfWork(VecinosUYContext VecinosUYContext)
