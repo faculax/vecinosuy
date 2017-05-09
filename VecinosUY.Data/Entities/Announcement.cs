@@ -19,6 +19,9 @@ namespace VecinosUY.Data.Entities
         [Required]
         public Boolean Deleted { get; set; }
 
+        public string Image { get; set; }
+
+
 
         public Announcement()
         {
