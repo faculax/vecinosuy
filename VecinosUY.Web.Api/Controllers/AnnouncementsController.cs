@@ -11,6 +11,9 @@ using System;
 using VecinosUY.Data.Repository;
 using VecinosUY.Factory;
 using System.Net.Http.Headers;
+using System.IO;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace VecinosUY.Web.Api.Controllers
 {    
@@ -150,6 +153,41 @@ namespace VecinosUY.Web.Api.Controllers
         }
 
         [ResponseType(typeof(void))]
+        [Route("api/announcements/admin")]
+        [HttpPost]
+        public IHttpActionResult PostAnnouncementAdmin(Announcement announcement)
+        {
+            
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                announcementValidator.PostAnnouncement(announcement);
+                notifyAndroidUsers(announcement.Title);
+
+            }
+            catch (NotAdminException exception)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, exception.Mymessage));
+            }
+            catch (NotExistException exception)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, exception.Mymessage));
+            }
+            catch (System.Data.SqlClient.SqlException)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "VecinosUY no se puede conectar a la base de datos (∩︵∩)"));
+            }
+            catch (Exception exception)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exception.Message));
+            }
+            return Ok();
+        }
+
+        [ResponseType(typeof(void))]
         [HttpGet]
         [Route("api/announcements/logicDelete/{announcementId}")]
         public IHttpActionResult DeleteAnnouncement(int announcementId)
@@ -189,7 +227,56 @@ namespace VecinosUY.Web.Api.Controllers
 
 
 
-    }
+
+        private void notifyAndroidUsers(string title)
+        {
+            try
+            {
+
+                HttpClient client = new HttpClient();
+                string RestUrl = "https://fcm.googleapis.com/fcm/send";
+                jsonNotification jsn = new jsonNotification();
+                jsn.body = title;
+                jsn.title = "El admin anuncio:";
+                jsonFirebaseRequest jfr = new jsonFirebaseRequest();
+                jfr.to = "/topics/allDevices";
+                jfr.notification = jsn;
+                var json = JsonConvert.SerializeObject(jfr);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", "key=AAAA8jvJGC0:APA91bGtrLm7bF9IQtK4Uhoh6eFn9sjfRk24bWSAJDiUjGgtwYzJBX4rnu_w-0HKDgaMfMuA5103GejnOCLXx1rwqsipmHP18SmeumQ5jrNISXEDydwY-Ef_m9pgM7O-AHlf1mSn4CdZ");
+                content.Headers.TryAddWithoutValidation("Authorization", "key=AAAA8jvJGC0:APA91bGtrLm7bF9IQtK4Uhoh6eFn9sjfRk24bWSAJDiUjGgtwYzJBX4rnu_w-0HKDgaMfMuA5103GejnOCLXx1rwqsipmHP18SmeumQ5jrNISXEDydwY-Ef_m9pgM7O-AHlf1mSn4CdZ");
+
+                HttpResponseMessage response = null;
+
+                //  response = await client.PostAsync(RestUrl, content);
+                client.PostAsync(RestUrl, content);
+
+              //  if (response.IsSuccessStatusCode)
+              //  {
+                    //Debug.WriteLine("Envío de Remito: Se envió correctamente");
+                //}
+                //else
+                //{
+                    //UserDialogs.Instance.InfoToast("Error al enviar remito");
+                //}
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+            public class jsonFirebaseRequest {
+            public string to { get; set; }
+            public jsonNotification notification { get; set; }
+
+        }
+
+        public class jsonNotification {
+            public string title { get; set; }
+            public string body { get; set; }
+        }
+        }
 
 
 }

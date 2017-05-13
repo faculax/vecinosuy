@@ -1,0 +1,20 @@
+<br/>
+<br />
+<br />
+<h3>Trabajar con anuncios</h3>
+<table class="table movietable">
+    <thead>
+        <tr>
+            <td>Titulo</td>
+            <td>Cuerpo</td>
+        </tr>
+    </thead>
+    <tr ng-repeat="announcement in greeting">
+        <td>{{announcement.Title}}</td>
+        <td>{{announcement.Body}}</td>        
+        <td>
+            <a class="btn btn-danger" ng-click="deleteAnnouncement(announcement)">Borrar</a>
+        </td>
+    </tr>
+</table>
+<a href="#newAnnouncement" class="btn-primary btn-lg nodecoration">Agregar anuncio</a>

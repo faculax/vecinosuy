@@ -52,6 +52,10 @@ VecinosUYApp.config(function ($routeProvider) {
             templateUrl: "Pages/allUsers.html",
             controller: "GetUsers"
         })
+        .when('/allAnnouncements', {
+            templateUrl: "Pages/allAnnouncements.html",
+            controller: "GetAnnouncements"
+        })
         .when('/viewUser/:id', {
             templateUrl: "Pages/viewUsers.html",
             controller: "GetUser"   
@@ -59,6 +63,10 @@ VecinosUYApp.config(function ($routeProvider) {
         .when('/newUser', {
             templateUrl: "Pages/newUser.html",
             controller: "PostUser"
+        })
+        .when('/newAnnouncement', {
+            templateUrl: "Pages/newAnnouncement.html",
+            controller: "PostAnnouncement"
         })
         .otherwise({
             redirectTo: '/'
@@ -260,9 +268,79 @@ VecinosUYApp
               alert("ERROR: " + JSON.stringify({ data: data.data.Message }));
           });
       }
+  }]).controller('PostAnnouncement', ['$scope', '$http', '$cookies', /*'$rooScope',*/ function ($scope, $http, $cookies/*, $rooScope*/) {
+      $scope.addAnnouncement = function () {
+          var title = $("#announcementTitle").val();
+          var body = $("#announcementBody").val();
+          idLogueado = $cookies.get('idLogueado');
+          var req = {
+              method: 'POST',
+              url: 'Api/announcements/admin',
+              headers: {
+                  'TODO_PAGOS_TOKEN': idLogueado
+              },
+              data: {
+                  "Title": title,
+                  "Body": body,
+                  "Deleted": false
+              }
+          }
+
+          var res = $http(req).then(function success(data, status, headers, config) {
+              $scope.message = data;
+              // mandar anuncio a android
+           //   notifyAndroid(title);
+
+              //
+              alert("Anuncio creado correctamente y usuarios notificados");
+              window.location.href = '/#/allAnnouncements';
+          }, function error(data, status, headers, config) {
+              alert("ERROR: " + JSON.stringify({ data: data.data.Message }));
+          });
+      }
   }]).controller('Desloguear', ['$scope', '$cookies', function ($scope, $cookies) {
       $cookies.put('idLogueado', '');
 
+  }]).controller('GetAnnouncements', ['$scope', '$http', '$cookies', function ($scope, $http, $cookies) {
+      $scope.get = function () {
+          idLogueado = $cookies.get('idLogueado');
+          var config = {
+              headers: {
+                  'TODO_PAGOS_TOKEN': idLogueado
+              }
+          };
+          $http.get('Api/announcements/', config,
+                function (response) {
+                    $scope.greeting = response.data;
+                },
+                function (failure) { console.log("Falla :(", failure); }).
+            then(function (response) {
+                $scope.greeting = response.data;
+            }, function (failure) {
+                $scope.greeting = failure.data;
+            });
+      }
+
+      $scope.deleteAnnouncement = function (announcement) {
+          idLogueado = $cookies.get('idLogueado');
+          var req = {
+              method: 'GET',
+              url: 'Api/Announcements/logicDelete/' + announcement.AnnouncementId,
+              headers: {
+                  'TODO_PAGOS_TOKEN': idLogueado
+              }
+          }
+
+          var res = $http(req).then(function success(data, status, headers, config) {
+              $scope.message = data;
+              $scope.get();
+          }, function error(data, status, headers, config) {
+              alert("ERROR: " + JSON.stringify({ data: data.data.Message }));
+          })
+      }
+
+ 
+      $scope.get();
   }])
 ;
 
@@ -288,6 +366,33 @@ var getJSON = function (url, callback) {
         }
     };
     xhr.send();
+};
+
+function notifyAndroid(title) {
+    var reqAlert = {
+        method: 'POST',
+        url: 'https://fcm.googleapis.com/fcm/send',
+        headers: {
+            'TODO_PAGOS_TOKEN': idLogueado,
+            'Authorization': 'key=AAAA8jvJGC0:APA91bGtrLm7bF9IQtK4Uhoh6eFn9sjfRk24bWSAJDiUjGgtwYzJBX4rnu_w-0HKDgaMfMuA5103GejnOCLXx1rwqsipmHP18SmeumQ5jrNISXEDydwY-Ef_m9pgM7O-AHlf1mSn4CdZ',
+            'Content-Type': 'application/json'
+        },
+        data: {
+            "notification": {
+                "title": "El admin creo un anuncio",
+                "body": title
+            },
+            "to": "/topics/allDevices"
+        }
+    }
+    var res2 = $http(reqAlert).then(function success(data, status, headers, config) {
+        $scope.message = data;
+    },
+
+    function error(data, status, headers, config) {
+    
+    }
+)
 };
 
 
