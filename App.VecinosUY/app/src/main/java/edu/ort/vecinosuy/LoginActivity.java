@@ -22,6 +22,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,6 +31,7 @@ import org.json.JSONObject;
 import java.util.regex.Pattern;
 
 import static android.R.attr.password;
+import static android.icu.text.RelativeDateTimeFormatter.Direction;
 import static edu.ort.vecinosuy.R.string.serverAddr;
 
 
@@ -36,10 +39,13 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener{
 
     Pattern emailPattern = Patterns.EMAIL_ADDRESS;
     String possibleEmail = "email";
+    public static String SERVER_DOWN = "sin conexion!";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+       // GoogleApiAvailability.makeGooglePlayServicesAvailable();
+        FirebaseMessaging.getInstance().subscribeToTopic("allDevices");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Button v=(Button)this.findViewById(R.id.entrarBtn);
@@ -86,7 +92,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener{
                             jsonObj = new JSONObject(response);
                             sessionToken = jsonObj.getString("Token");
                         } catch (JSONException e) {}
-                        callMainActivity(response, sessionToken);
+                        callMainActivity(response, sessionToken, false);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -112,18 +118,22 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener{
                             jsonObj = new JSONObject(response);
                             token = jsonObj.getString("Token");
                         } catch (JSONException e) {}
-                        callMainActivity(response, token);
+                        callMainActivity(response, token, false);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                mTxtDisplay.setText("Ha sido deslogueado por el admin, reingrese");
+                if (error.networkResponse == null) {
+                    callMainActivity("", "", true);
+                } else {
+                    mTxtDisplay.setText("Ha sido deslogueado por el admin, reingrese");
+                }
             }
         });
         queue.add(stringRequest);
     }
 
-    private void callMainActivity(String response, String token) {
+    private void callMainActivity(String response, String token, boolean serverDown) {
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(getString(R.string.vecinosUySessionToken), token);
@@ -136,6 +146,9 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener{
         } catch (JSONException e) {}
         Intent i = new Intent(getApplicationContext(), MainActivity.class);
         Bundle loginMainBoundle = new Bundle();
+        if (serverDown) {
+            userName = this.SERVER_DOWN;
+        }
         loginMainBoundle.putString("userName", userName);
         loginMainBoundle.putString("token", token);
         i.putExtras(loginMainBoundle);

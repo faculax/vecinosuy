@@ -2,7 +2,10 @@ package edu.ort.vecinosuy;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
@@ -15,6 +18,7 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,11 +48,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import logic.AnnouncementContract;
+import logic.AnnouncementDbHelper;
+
 import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
+import static java.security.AccessController.getContext;
 
 public class AnnouncementFormActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Bitmap image;
+    private Bitmap image;
+    private int id;
+    private String ann_title;
+    private String ann_body;
+    private String ann_image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,15 +73,24 @@ public class AnnouncementFormActivity extends AppCompatActivity implements View.
         v.setOnClickListener(this);
         Bundle announcementsBoundle = getIntent().getExtras();
         boolean isNew = true;
+        CheckBox fav   = (CheckBox)findViewById(R.id.checkbox_fav);
+        fav.setVisibility(View.GONE);
         if(announcementsBoundle != null) {
             isNew = announcementsBoundle.getBoolean("new");
             if (!isNew){
+                fav.setVisibility(View.VISIBLE);
+                if(announcementsBoundle.getBoolean("announcementFav")){
+                    fav.setChecked(true);
+                }
                 EditText titleField   = (EditText)findViewById(R.id.titleTxt);
                 titleField.setFocusable(false);
-                titleField.setText(announcementsBoundle.getString("announcementTitle"));
+                this.id = announcementsBoundle.getInt("announcementId");
+                this.ann_title = announcementsBoundle.getString("announcementTitle");
+                titleField.setText(ann_title);
                 EditText bodyField   = (EditText)findViewById(R.id.bodyTxt);
                 bodyField.setFocusable(false);
-                bodyField.setText(announcementsBoundle.getString("announcementBody"));
+                this.ann_body = announcementsBoundle.getString("announcementBody");
+                bodyField.setText(ann_body);
                 Button photoButton   = (Button)findViewById(R.id.photoBtn);
                 photoButton.setVisibility(View.GONE);
                 Button sendButton   = (Button)findViewById(R.id.submitBtn);
@@ -77,10 +98,49 @@ public class AnnouncementFormActivity extends AppCompatActivity implements View.
                 TextView lbl   = (TextView)findViewById(R.id.labelAnnForm);
                 lbl.setText("Anuncio:");
                 ImageView iv = (ImageView) findViewById(R.id.annImgView);
-                iv.setImageBitmap(this.StringToBitMap(announcementsBoundle.getString("announcementImage")));
+                this.ann_image = announcementsBoundle.getString("announcementImage");
+                iv.setImageBitmap(this.StringToBitMap(ann_image));
             }
         }
     }
+
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.checkbox_fav:
+                Bundle announcementsBoundle = getIntent().getExtras();
+                if (checked) {
+                    // Put some meat on the sandwich
+                    AnnouncementDbHelper mDbHelper = new AnnouncementDbHelper(this);
+                    // Gets the data repository in write mode
+                    SQLiteDatabase db = mDbHelper.getWritableDatabase();
+                    // Create a new map of values, where column names are the keys
+                    ContentValues values = new ContentValues();
+                    values.put(AnnouncementContract.AnnouncementEntry.COLUMN_NAME_ANNOUNCEMENT_ID, id);
+                    values.put(AnnouncementContract.AnnouncementEntry.COLUMN_NAME_TITLE, announcementsBoundle.getString("announcementTitle"));
+                    values.put(AnnouncementContract.AnnouncementEntry.COLUMN_NAME_BODY, announcementsBoundle.getString("announcementBody"));
+                    values.put(AnnouncementContract.AnnouncementEntry.COLUMN_NAME_IMAGE, announcementsBoundle.getString("announcementImage"));
+                    // Insert the new row, returning the primary key value of the new row
+                    long newRowId = db.insert(AnnouncementContract.AnnouncementEntry.TABLE_NAME, null, values);
+
+                }else{
+                    // Define 'where' part of query.
+                    String selection = AnnouncementContract.AnnouncementEntry.COLUMN_NAME_ANNOUNCEMENT_ID + " LIKE ?";
+                    // Specify arguments in placeholder order.
+                    String[] selectionArgs = { this.id+"" };
+//                  Issue SQL statement.
+                    AnnouncementDbHelper mDbHelper = new AnnouncementDbHelper(this);
+                    SQLiteDatabase db = mDbHelper.getWritableDatabase();
+                    db.delete(AnnouncementContract.AnnouncementEntry.TABLE_NAME, selection, selectionArgs);
+
+                }
+                break;
+        }
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -180,4 +240,5 @@ public class AnnouncementFormActivity extends AppCompatActivity implements View.
             return null;
         }
     }
+
 }

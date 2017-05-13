@@ -37,6 +37,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
+        <CheckBox android:id="@+id/checkbox_fav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Favorito"
+            android:onClick="onCheckboxClicked"/>
 
         <Button android:id="@+id/submitBtn" android:layout_height="wrap_content" android:layout_width="wrap_content"
             android:layout_gravity="center" android:layout_marginBottom="25dip"

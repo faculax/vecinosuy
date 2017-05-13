@@ -2,6 +2,8 @@ package edu.ort.vecinosuy;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +19,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import logic.AnnouncementContract;
+import logic.AnnouncementDbHelper;
 import logic.Repository;
+
+import static java.security.AccessController.getContext;
 
 public class AnnouncementActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -36,6 +42,10 @@ public class AnnouncementActivity extends AppCompatActivity implements View.OnCl
         String token = getString(R.string.vecinosUySessionToken);
         if(announcementsBoundle != null) {
             announcements = announcementsBoundle.getStringArrayList("announcements");
+            if(announcementsBoundle.getBoolean("serverdown")){
+                FloatingActionButton v2=(FloatingActionButton)this.findViewById(R.id.fab);
+                v2.setVisibility(View.GONE);
+            }
         }
         final ListView listview = (ListView) findViewById(R.id.listview);
 
@@ -63,17 +73,11 @@ public class AnnouncementActivity extends AppCompatActivity implements View.OnCl
                 announcementsBoundle.putString("announcementTitle", announcementTitle);
                 announcementsBoundle.putString("announcementImage", Repository.getInstance().announcementImage.get(annauncementId));
                 announcementsBoundle.putString("announcementBody", Repository.getInstance().announcementBody.get(annauncementId));
+                // chequear si el anuncio es favorito
+                checkFavorite(annauncementId,announcementsBoundle);
+                //
                 i.putExtras(announcementsBoundle);
                 startActivity(i);
-               /* view.animate().setDuration(2000).alpha(0)
-                        .withEndAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                list.remove(item);
-                                adapter.notifyDataSetChanged();
-                                view.setAlpha(1);
-                            }
-                        }); */
             }
         });
 
@@ -122,5 +126,35 @@ public class AnnouncementActivity extends AppCompatActivity implements View.OnCl
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+    private void checkFavorite(int annauncementId, Bundle announcementsBoundle){
+        AnnouncementDbHelper mDbHelper = new AnnouncementDbHelper(this);
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                AnnouncementContract.AnnouncementEntry.COLUMN_NAME_ANNOUNCEMENT_ID,
+                AnnouncementContract.AnnouncementEntry.COLUMN_NAME_TITLE
+        };
+        // Filter results WHERE "title" = 'My Title'
+        String selection = AnnouncementContract.AnnouncementEntry.COLUMN_NAME_ANNOUNCEMENT_ID + " = ?";
+        String[] selectionArgs = { annauncementId+"" };
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                AnnouncementContract.AnnouncementEntry.COLUMN_NAME_ANNOUNCEMENT_ID + " DESC";
+        Cursor cursor = db.query(
+                AnnouncementContract.AnnouncementEntry.TABLE_NAME,                     // The table to query
+                projection,                               // The columns to return
+                selection,                                // The columns for the WHERE clause
+                selectionArgs,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                sortOrder                                 // The sort order
+        );
+        if(cursor.getCount()>0){
+            announcementsBoundle.putBoolean("announcementFav", true);
+        }else {
+            announcementsBoundle.putBoolean("announcementFav", false);
+        }
     }
 }

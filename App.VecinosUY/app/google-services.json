@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1040385120301",
+    "firebase_url": "https://vecinosuy-5fdff.firebaseio.com",
+    "project_id": "vecinosuy-5fdff",
+    "storage_bucket": "vecinosuy-5fdff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1040385120301:android:8b8955dfe9391d0a",
+        "android_client_info": {
+          "package_name": "edu.ort.vecinosuy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1040385120301-cr13d43nrv450clcp5qot7rh1hdpftre.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF4aFKyZ_RxW_xp5dC7L5E5JgsxFXcZ3E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
