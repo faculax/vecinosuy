@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:padding="10dp"
     android:fillViewport="false">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/fondo" android:layout_height="fill_parent"
     android:layout_width="fill_parent" android:padding="30dip"
