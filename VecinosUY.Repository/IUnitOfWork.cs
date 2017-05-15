@@ -13,6 +13,7 @@ namespace VecinosUY.Data.Repository
         IRepository<FavoriteAdds> FavoriteAddsRepository { get; }
 
         IRepository<Announcement> AnnouncementRepository { get; }
+        IRepository<AccountState> AccountStateRepository { get; }
 
         IRepository<Property> PropertyRepository { get; }
 

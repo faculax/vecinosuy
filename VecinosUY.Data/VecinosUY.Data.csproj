@@ -55,6 +55,7 @@
     <Compile Include="Entities\Property.cs" />
     <Compile Include="Entities\Service.cs" />
     <Compile Include="Entities\Announcement.cs" />
+    <Compile Include="Entities\AccountState.cs" />
     <Compile Include="Entities\UserDTO.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

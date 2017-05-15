@@ -52,6 +52,10 @@ VecinosUYApp.config(function ($routeProvider) {
             templateUrl: "Pages/allUsers.html",
             controller: "GetUsers"
         })
+		.when('/allAccountStates', {
+            templateUrl: "Pages/allAccountStates.html",
+            controller: "GetAccountStates"
+        })
         .when('/allAnnouncements', {
             templateUrl: "Pages/allAnnouncements.html",
             controller: "GetAnnouncements"
@@ -63,6 +67,10 @@ VecinosUYApp.config(function ($routeProvider) {
         .when('/newUser', {
             templateUrl: "Pages/newUser.html",
             controller: "PostUser"
+        })
+		.when('/newAccountState', {
+            templateUrl: "Pages/newAccountState.html",
+            controller: "PostAccountState"
         })
         .when('/newAnnouncement', {
             templateUrl: "Pages/newAnnouncement.html",
@@ -268,6 +276,40 @@ VecinosUYApp
               alert("ERROR: " + JSON.stringify({ data: data.data.Message }));
           });
       }
+  }]).controller('PostAccountState', ['$scope', '$http', '$cookies', /*'$rooScope',*/ function ($scope, $http, $cookies/*, $rooScope*/) {
+      $scope.addAccountState = function () {
+          var userId = $("#accountStateUserId").val();
+          var mnth = $("#accountStateMonth").val();
+		  var year = $("#accountStateYear").val();
+		  var ammount = $("#accountStateAmmount").val();
+          idLogueado = $cookies.get('idLogueado');
+          var req = {
+              method: 'POST',
+              url: 'Api/accountStates',
+              headers: {
+                  'TODO_PAGOS_TOKEN': idLogueado
+              },
+              data: {
+                  "UserId": userId,
+                  "Month": mnth,
+				  "Year": year,
+				  "Ammount": ammount,
+                  "Deleted": false
+              }
+          }
+
+          var res = $http(req).then(function success(data, status, headers, config) {
+              $scope.message = data;
+              // mandar anuncio a android
+           //   notifyAndroid(title);
+
+              //
+              alert("Estado de cuenta creado correctamente");
+              window.location.href = '/#/allAccountStates';
+          }, function error(data, status, headers, config) {
+              alert("ERROR: " + JSON.stringify({ data: data.data.Message }));
+          });
+      }
   }]).controller('PostAnnouncement', ['$scope', '$http', '$cookies', /*'$rooScope',*/ function ($scope, $http, $cookies/*, $rooScope*/) {
       $scope.addAnnouncement = function () {
           var title = $("#announcementTitle").val();
@@ -300,6 +342,48 @@ VecinosUYApp
       }
   }]).controller('Desloguear', ['$scope', '$cookies', function ($scope, $cookies) {
       $cookies.put('idLogueado', '');
+
+  }]).controller('GetAccountStates', ['$scope', '$http', '$cookies', function ($scope, $http, $cookies) {
+      $scope.get = function () {
+          idLogueado = $cookies.get('idLogueado');
+          var config = {
+              headers: {
+                  'TODO_PAGOS_TOKEN': idLogueado
+              }
+          };
+          $http.get('Api/AccountStates/', config,
+                function (response) {
+                    $scope.greeting = response.data;
+                },
+                function (failure) { console.log("Falla :(", failure); }).
+            then(function (response) {
+                $scope.greeting = response.data;
+            }, function (failure) {
+                $scope.greeting = failure.data;
+            });
+      }
+
+      $scope.deleteAccountState = function (AccountState) {
+          idLogueado = $cookies.get('idLogueado');
+          var req = {
+              method: 'GET',
+              url:  '/Api/accountstates/' +AccountState.UserId + '/logicdelete/' + AccountState.Month + '/' + AccountState.Year,
+			 
+              headers: {
+                  'TODO_PAGOS_TOKEN': idLogueado
+              }
+          }
+
+          var res = $http(req).then(function success(data, status, headers, config) {
+              $scope.message = data;
+              $scope.get();
+          }, function error(data, status, headers, config) {
+              alert("ERROR: " + JSON.stringify({ data: data.data.Message }));
+          })
+      }
+
+ 
+      $scope.get();
 
   }]).controller('GetAnnouncements', ['$scope', '$http', '$cookies', function ($scope, $http, $cookies) {
       $scope.get = function () {
@@ -341,7 +425,9 @@ VecinosUYApp
 
  
       $scope.get();
-  }])
+  }
+  
+  ])
 ;
 
 function logout() {

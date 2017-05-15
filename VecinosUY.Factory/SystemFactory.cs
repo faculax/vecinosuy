@@ -16,6 +16,7 @@ namespace VecinosUY.Factory
         private static UnitOfWork unitOfWork;
         private static UserValidator userValidator;
         private static BuildingValidator buildingValidator;
+        private static AccountStateValidator accountStateValidator;
         private static ServiceValidator serviceValidator;
         private static BookingValidator bookingValidator;
         private static AnnouncementValidator announcementValidator;
@@ -90,6 +91,14 @@ namespace VecinosUY.Factory
                 announcementValidator = new AnnouncementValidator(GetUnitOfWofkInstance());
             }
             return announcementValidator;
+        }
+        public static AccountStateValidator GetAccountStateValidatorInstance()
+        {
+            if (accountStateValidator == null)
+            {
+                accountStateValidator = new AccountStateValidator(GetUnitOfWofkInstance());
+            }
+            return accountStateValidator;
         }
     }
 }

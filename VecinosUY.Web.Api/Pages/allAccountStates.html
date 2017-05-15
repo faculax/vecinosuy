@@ -1,0 +1,24 @@
+<br/>
+<br />
+<br />
+<h3>Trabajar con estados de cuenta</h3>
+<table class="table movietable">
+    <thead>
+        <tr>
+            <td>Usuario</td>
+            <td>Mes</td>
+			<td>Ano</td>
+            <td>Monto</td>
+        </tr>
+    </thead>
+    <tr ng-repeat="accountState in greeting">
+        <td>{{accountState.UserId}}</td>
+        <td>{{accountState.Month}}</td>  
+		<td>{{accountState.Year}}</td>
+        <td>{{accountState.Ammount}}</td>  		
+        <td>
+            <a class="btn btn-danger" ng-click="deleteAccountState(accountState)">Borrar</a>
+        </td>
+    </tr>
+</table>
+<a href="#newAccountState" class="btn-primary btn-lg nodecoration">Agregar estado de cuenta</a>

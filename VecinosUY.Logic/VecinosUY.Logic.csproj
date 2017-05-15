@@ -47,9 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountStateValidator.cs" />
     <Compile Include="BookingValidator.cs" />
     <Compile Include="BuildingValidator.cs" />
     <Compile Include="DependencyResolver.cs" />
+    <Compile Include="IAccountStateValidator.cs" />
     <Compile Include="IBookingValidator.cs" />
     <Compile Include="IBuildingValidator.cs" />
     <Compile Include="IPropertiesValidator.cs" />

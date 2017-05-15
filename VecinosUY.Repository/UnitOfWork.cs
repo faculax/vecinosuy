@@ -16,6 +16,7 @@ namespace VecinosUY.Data.Repository
         private VecinosUYContext context;
         private GenericRepository<User> userRepository;
         private GenericRepository<Announcement> announcementRepository;
+        private GenericRepository<AccountState> accountStateRepository;
         private GenericRepository<Property> propertieRepository;
         private GenericRepository<Building> buildingRepository;
         private GenericRepository<Service> serviceRepository;
@@ -118,6 +119,19 @@ namespace VecinosUY.Data.Repository
             }
         }
 
+        public IRepository<AccountState> AccountStateRepository
+        {
+            get
+            {
+
+                if (this.accountStateRepository == null)
+                {
+                    this.accountStateRepository = new GenericRepository<AccountState>(context);
+                }
+                return accountStateRepository;
+            }
+        }
+
 
         public ILogger Logger
         {
@@ -134,12 +148,17 @@ namespace VecinosUY.Data.Repository
         public void Save()
         {
             try
-            { 
+            {
                 context.SaveChanges();
             }
             catch (OptimisticConcurrencyException)
             {
-               
+
+            }
+            catch (Exception e) {
+                context.AccountStates.Local.Clear();
+                context.Users.Local.Clear();
+                throw e;
             }
 }
 
