@@ -63,6 +63,7 @@
         <activity android:name=".AnnouncementFormActivity" />
         <activity android:name=".AccountStateActivity" />
         <activity android:name=".MeetingActivity"></activity>
+        <activity android:name=".VoteActivity"></activity>
     </application>
 
 </manifest>
