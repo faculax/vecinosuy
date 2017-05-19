@@ -38,6 +38,7 @@ import logic.AnnouncementContract;
 import logic.AnnouncementDbHelper;
 import logic.Repository;
 
+import static android.R.attr.id;
 import static android.R.attr.password;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener{
@@ -57,73 +58,207 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         }
         Button v=(Button)this.findViewById(R.id.announcementsBtn);
         v.setOnClickListener(this);
+        v=(Button)this.findViewById(R.id.accountStateBtn);
+        v.setOnClickListener(this);
+        v=(Button)this.findViewById(R.id.mtngsBtn);
+        v.setOnClickListener(this);
+        v=(Button)this.findViewById(R.id.voteBtn);
+        v.setOnClickListener(this);
 
     }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.announcementsBtn:
-                String serverAddr = getResources().getString(R.string.serverAddr) + "announcements/";
-                RequestQueue queue = Volley.newRequestQueue(this);
-                StringRequest stringRequest = new StringRequest(Request.Method.GET, serverAddr,
-                        new Response.Listener<String>() {
-
-                            @Override
-                            public void onResponse(String response) {
-                                JSONArray jsonArray;
-                                ArrayList<String> announcements = new ArrayList<String>();
-                                try {
-                                    jsonArray = new JSONArray(response);
-                                    Repository.getInstance().announcementBody.clear();
-                                    Repository.getInstance().announcementImage.clear();
-                                    for (int i = 0; i< jsonArray.length(); i++) {
-                                        JSONObject jsonObject = (JSONObject)jsonArray.get(i);
-                                        String title = jsonObject.getString("Title");
-                                        String id = jsonObject.getString("AnnouncementId");
-                                        String body = jsonObject.getString("Body");
-                                        String image = jsonObject.getString("Image");
-                                        announcements.add(id + ": " + title);
-                                        Repository.getInstance().announcementBody.put(Integer.parseInt(id),body);
-                                        Repository.getInstance().announcementImage.put(Integer.parseInt(id),image);
-                                    }
-                                } catch (JSONException e) {
-                                }
-                                catch (Exception e) {
-                                    String ee = e.toString();
-                                }
-                                Intent i = new Intent(getApplicationContext(), AnnouncementActivity.class);
-                                Bundle announcementsBoundle = new Bundle();
-                                announcementsBoundle.putStringArrayList("announcements", announcements);
-                                announcementsBoundle.putBoolean("serverdown", false);
-                                i.putExtras(announcementsBoundle);
-                                startActivity(i);
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //mTxtDisplay.setText("Error de logueo, reintente");
-                        // cargar anuncios desde la base
-                        readFromLocalDB();
-
-                    }
-                })
-                {
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        String email = getLogedUserEmail();
-                        Map<String, String>  params = new HashMap<String, String>();
-                        params.put("TODO_PAGOS_TOKEN", email);
-                        params.put("Content-Type", "application/json");
-
-                        return params;
-                    }
-                };
-                queue.add(stringRequest);
+                manageAnnouncements();
               //  finish();
+                break;
+            case R.id.accountStateBtn:
+                manageAccounts();
+                break;
+            case R.id.mtngsBtn:
+                manageMeetings();
+                break;
+            case R.id.voteBtn:
+                manageVotes();
                 break;
         }
 
     }
+
+    private void manageVotes() {
+        String serverAddr = getResources().getString(R.string.serverAddr) + "votes";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, serverAddr,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                       /* JSONArray jsonArray;
+                        ArrayList<String> accountStates = new ArrayList<String>();
+                        try {
+                            jsonArray = new JSONArray(response);
+                            for (int i = 0; i< jsonArray.length(); i++) {
+                                JSONObject jsonObject = (JSONObject)jsonArray.get(i);
+                                String month = jsonObject.getString("Month");
+                                String year = jsonObject.getString("Year");
+                                String ammount = jsonObject.getString("Ammount");
+                                accountStates.add(month + "/" + year + " total: " + ammount);
+                            }
+                        } catch (JSONException e) {
+                        }
+                        catch (Exception e) {
+                        }
+                        Intent i = new Intent(getApplicationContext(), AccountStateActivity.class);
+                        Bundle accountStateBundle = new Bundle();
+                        accountStateBundle.putStringArrayList("accountStates", accountStates);
+                        i.putExtras(accountStateBundle);
+                        startActivity(i); */
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Intent i = new Intent(getApplicationContext(), VoteActivity.class);
+                Bundle voteBundle = new Bundle();
+                ArrayList<String> votes = new ArrayList<String>();
+                votes.add("Perros en el edificio ?");
+                votes.add("Mejora de la azotea ?");
+                voteBundle.putStringArrayList("votes", votes);
+                i.putExtras(voteBundle);
+                startActivity(i);
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                String email = getLogedUserEmail();
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("TODO_PAGOS_TOKEN", email);
+                params.put("Content-Type", "application/json");
+
+                return params;
+            }
+        };
+        queue.add(stringRequest);
+    }
+
+    private void manageMeetings() {
+        Repository.getInstance().reset();
+        Intent i = new Intent(getApplicationContext(), MeetingActivity.class);
+        startActivity(i);
+    }
+
+    private void manageAccounts() {
+        String serverAddr = getResources().getString(R.string.serverAddr) + "accountstates/byId";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, serverAddr,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        JSONArray jsonArray;
+                        ArrayList<String> accountStates = new ArrayList<String>();
+                        try {
+                            jsonArray = new JSONArray(response);
+                            for (int i = 0; i< jsonArray.length(); i++) {
+                                JSONObject jsonObject = (JSONObject)jsonArray.get(i);
+                                String month = jsonObject.getString("Month");
+                                String year = jsonObject.getString("Year");
+                                String ammount = jsonObject.getString("Ammount");
+                                accountStates.add(month + "/" + year + " total: " + ammount);
+                            }
+                        } catch (JSONException e) {
+                        }
+                        catch (Exception e) {
+                        }
+                        Intent i = new Intent(getApplicationContext(), AccountStateActivity.class);
+                        Bundle accountStateBundle = new Bundle();
+                        accountStateBundle.putStringArrayList("accountStates", accountStates);
+                        i.putExtras(accountStateBundle);
+                            startActivity(i);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                String email = getLogedUserEmail();
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("TODO_PAGOS_TOKEN", email);
+                params.put("Content-Type", "application/json");
+
+                return params;
+            }
+        };
+        queue.add(stringRequest);
+    }
+
+    private void manageAnnouncements() {
+        String serverAddr = getResources().getString(R.string.serverAddr) + "announcements/";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, serverAddr,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        JSONArray jsonArray;
+                        ArrayList<String> announcements = new ArrayList<String>();
+                        try {
+                            jsonArray = new JSONArray(response);
+                            Repository.getInstance().announcementBody.clear();
+                            Repository.getInstance().announcementImage.clear();
+                            for (int i = 0; i< jsonArray.length(); i++) {
+                                JSONObject jsonObject = (JSONObject)jsonArray.get(i);
+                                String title = jsonObject.getString("Title");
+                                String id = jsonObject.getString("AnnouncementId");
+                                String body = jsonObject.getString("Body");
+                                String image = jsonObject.getString("Image");
+                                announcements.add(id + ": " + title);
+                                Repository.getInstance().announcementBody.put(Integer.parseInt(id),body);
+                                Repository.getInstance().announcementImage.put(Integer.parseInt(id),image);
+                            }
+                        } catch (JSONException e) {
+                        }
+                        catch (Exception e) {
+                            String ee = e.toString();
+                        }
+                        Intent i = new Intent(getApplicationContext(), AnnouncementActivity.class);
+                        Bundle announcementsBoundle = new Bundle();
+                        announcementsBoundle.putStringArrayList("announcements", announcements);
+                        announcementsBoundle.putBoolean("serverdown", false);
+                        i.putExtras(announcementsBoundle);
+                        startActivity(i);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //mTxtDisplay.setText("Error de logueo, reintente");
+                // cargar anuncios desde la base
+                readFromLocalDB();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                String email = getLogedUserEmail();
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("TODO_PAGOS_TOKEN", email);
+                params.put("Content-Type", "application/json");
+
+                return params;
+            }
+        };
+        queue.add(stringRequest);
+    }
+
     private String getLogedUserEmail(){
         Account[] accounts = AccountManager.get(this).getAccounts();
         Pattern emailPattern = Patterns.EMAIL_ADDRESS;

@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,9 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -35,6 +39,13 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.share.Sharer;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,6 +72,7 @@ public class AnnouncementFormActivity extends AppCompatActivity implements View.
     private String ann_title;
     private String ann_body;
     private String ann_image;
+    private boolean isNew;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +84,7 @@ public class AnnouncementFormActivity extends AppCompatActivity implements View.
         v=(Button)this.findViewById(R.id.photoBtn);
         v.setOnClickListener(this);
         Bundle announcementsBoundle = getIntent().getExtras();
-        boolean isNew = true;
+        isNew = true;
         CheckBox fav   = (CheckBox)findViewById(R.id.checkbox_fav);
         fav.setVisibility(View.GONE);
         if(announcementsBoundle != null) {
@@ -94,7 +106,8 @@ public class AnnouncementFormActivity extends AppCompatActivity implements View.
                 Button photoButton   = (Button)findViewById(R.id.photoBtn);
                 photoButton.setVisibility(View.GONE);
                 Button sendButton   = (Button)findViewById(R.id.submitBtn);
-                sendButton.setVisibility(View.GONE);
+                sendButton.setText("Compartir");
+               // sendButton.setVisibility(View.GONE);
                 TextView lbl   = (TextView)findViewById(R.id.labelAnnForm);
                 lbl.setText("Anuncio:");
                 ImageView iv = (ImageView) findViewById(R.id.annImgView);
@@ -150,7 +163,12 @@ public class AnnouncementFormActivity extends AppCompatActivity implements View.
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.submitBtn:
-                postAnnouncement();
+                if(isNew) {
+                    postAnnouncement();
+                }else {
+                   this.onShareResult(v);
+
+                }
                 break;
             case R.id.photoBtn:
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -239,6 +257,51 @@ public class AnnouncementFormActivity extends AppCompatActivity implements View.
             e.getMessage();
             return null;
         }
+    }
+    public void onShareResult(View view){
+        try {
+            FacebookSdk.setApplicationId(getResources().getString(R.string.facebook_app_id));
+            FacebookSdk.sdkInitialize(getApplicationContext());
+        } catch (Exception e) {
+            String a = e.getMessage();
+        }
+        CallbackManager callbackManager = CallbackManager.Factory.create();
+        final ShareDialog shareDialog = new ShareDialog(this);
+
+        shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
+
+            @Override
+            public void onSuccess(Sharer.Result result) {
+                Log.d("", "success");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.d("", "error");
+            }
+
+            @Override
+            public void onCancel() {
+                Log.d("", "cancel");
+            }
+        });
+
+
+        if (shareDialog.canShow(ShareLinkContent.class)) {
+
+            ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                    .setContentTitle(ann_title)
+                    .setContentDescription(ann_body)
+                    .setContentUrl(Uri.parse("http://www.ort.edu.uy"))
+
+                    //.setImageUrl(Uri.parse("android.resource://de.ginkoboy.flashcards/" + R.drawable.logo_flashcards_pro))
+                    .setImageUrl(Uri.parse("http://queencreek.org/Home/ShowImage?id=8654"))
+                    .build();
+
+            shareDialog.show(linkContent);
+        }
+
+
     }
 
 }
