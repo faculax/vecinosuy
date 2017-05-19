@@ -2,9 +2,7 @@ package edu.ort.vecinosuy;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +11,6 @@ import android.util.Patterns;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -30,16 +27,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.regex.Pattern;
 
 import logic.AnnouncementContract;
 import logic.AnnouncementDbHelper;
 import logic.Repository;
-
-import static android.R.attr.id;
-import static android.R.attr.password;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener{
 
@@ -145,9 +138,52 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     }
 
     private void manageMeetings() {
-        Repository.getInstance().reset();
-        Intent i = new Intent(getApplicationContext(), MeetingActivity.class);
-        startActivity(i);
+        String serverAddr = getResources().getString(R.string.serverAddr) + "meetings";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, serverAddr,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        JSONArray jsonArray;
+                        ArrayList<String> meetings = new ArrayList<String>();
+                        try {
+                            jsonArray = new JSONArray(response);
+                            for (int i = 0; i< jsonArray.length(); i++) {
+                                JSONObject jsonObject = (JSONObject)jsonArray.get(i);
+                                String date = jsonObject.getString("Date");
+                                String subject = jsonObject.getString("Subject");
+                                meetings.add(subject + " " + date);
+                            }
+                        } catch (JSONException e) {
+                        }
+                        catch (Exception e) {
+                        }
+                        Intent i = new Intent(getApplicationContext(), MeetingActivity.class);
+                        Bundle meetingsBundle = new Bundle();
+                        meetingsBundle.putStringArrayList("meetings", meetings);
+                        i.putExtras(meetingsBundle);
+                        startActivity(i);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                String email = getLogedUserEmail();
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("TODO_PAGOS_TOKEN", email);
+                params.put("Content-Type", "application/json");
+
+                return params;
+            }
+        };
+        queue.add(stringRequest);
     }
 
     private void manageAccounts() {

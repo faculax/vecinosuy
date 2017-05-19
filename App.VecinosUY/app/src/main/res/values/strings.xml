@@ -15,7 +15,7 @@
     <string name="reserve">"Reserva"</string>
     <string name="agenda">"Agenda"</string>
     <string name="vecinosUySessionToken">vecinosUySessionToken</string>
-    <string name="serverAddr">http://172.20.0.232:45455/api/</string>
+    <string name="serverAddr">http://192.168.0.105:45455/api/</string>
     <string name="title_activity_announcement">AnnouncementActivity</string>
     <string name="title_activity_to_delete">toDeleteActivity</string>
     <string name="title_activity_borrar">BORRARActivity</string>
