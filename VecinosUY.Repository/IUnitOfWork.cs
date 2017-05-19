@@ -15,6 +15,8 @@ namespace VecinosUY.Data.Repository
         IRepository<Announcement> AnnouncementRepository { get; }
         IRepository<AccountState> AccountStateRepository { get; }
 
+        IRepository<Meeting> MeetingRepository { get; }
+
         IRepository<Property> PropertyRepository { get; }
 
         ILogger Logger { get; }

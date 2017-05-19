@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMeetingValidator.cs" />
+    <Compile Include="MeetingValidator.cs" />
     <Compile Include="AccountStateValidator.cs" />
     <Compile Include="BookingValidator.cs" />
     <Compile Include="BuildingValidator.cs" />

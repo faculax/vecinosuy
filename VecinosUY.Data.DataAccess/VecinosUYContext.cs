@@ -13,6 +13,8 @@ namespace VecinosUY.Data.DataAccess
         public DbSet<Announcement> Announcements { get; set; }
         public DbSet<AccountState> AccountStates { get; set; }
 
+        public DbSet<Meeting> Meetings { get; set; }
+
         public VecinosUYContext() : base("VecinosUYContext")
         {
             Database.SetInitializer<VecinosUYContext>(new DropCreateDatabaseIfModelChanges<VecinosUYContext>());
