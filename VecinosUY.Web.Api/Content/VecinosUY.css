@@ -8,20 +8,24 @@
     margin:auto;
     font-family:Arial, Helvetica, sans-serif;
     width:100%;
-    background-color:#4CAF50;
+    background-color:#000066;
     height:38px;
 }
 /*form {
     border: 3px solid #f1f1f1;    
 }*/
 
-/*#pass{
+#pass{
     width:30% !important;
 }
 
 #id{
     width:30% !important;
-}*/
+}
+
+#login{
+    width:30% !important;
+}
 
 input[type=text], input[type=password] {
     width: 100%;
@@ -33,7 +37,7 @@ input[type=text], input[type=password] {
 }
 
 #login {
-    background-color: #4CAF50;
+    background-color: #000066;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -45,7 +49,7 @@ input[type=text], input[type=password] {
 .cancelbtn {
     width: auto;
     padding: 10px 18px;
-    background-color: #f44336;
+    background-color: #FFD74A;
 }
 
 .imgcontainer {
@@ -53,9 +57,8 @@ input[type=text], input[type=password] {
     margin: 60px 0 30px 0;
 }
 
-img.avatar {
+img.logo {
     width: 150px;
-    border-radius: 50%;
 }
 
 .container {
@@ -79,7 +82,7 @@ ul, ol {
 }
 
 .nav li a {
-    background-color:#4CAF50;
+    background-color:#000066;
     color:#fff;
     text-decoration:none;
     padding:10px 12px;
@@ -99,7 +102,7 @@ ul, ol {
     color: red;
 }
 .labelUsu{
-    background-color:#4CAF50;
+    background-color:#000066;
     color:#fff;
     text-decoration:none;
     padding:10px 12px;
@@ -107,10 +110,10 @@ ul, ol {
 }
 
 .nav li a:hover {
-    background-color:#3D8A3F !important;
+    background-color:#FFD74A !important;
 }
 .nav li a{
-    background-color:#4CAF50 !important;
+    background-color:#000066 !important;
 }
 .nav li ul {
     display:none;
@@ -185,4 +188,8 @@ a.nodecoration{
 
 .modal-footer {
     background-color: #f9f9f9;
+}
+
+.btn-primary btn-lg nodecoration {
+    color: #000066;
 }

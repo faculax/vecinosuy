@@ -5,8 +5,8 @@
 <table class="table movietable">
     <thead>
         <tr>
-            <td>Id de usuario</td>
-            <td>Nombre</td>
+            <td><b>Id de usuario:</b></td>
+            <td><b>Nombre:</b></td>
         </tr>
     </thead>
     <tr ng-repeat="user in greeting">
@@ -14,9 +14,9 @@
         <td>{{user.Name}}</td>        
         <td>
             <a class="btn btn-primary" href="#viewUser/{{user.UserId}}">Modificar</a>
-            <a class="btn btn-danger" ng-click="deleteUser(user)">Borrar</a>
-            <a class="btn btn-warning" ng-click="deleteToken(user)">Desloguear</a>
+            <a class="btn btn-primary" ng-click="deleteUser(user)">Borrar</a>
+            <a class="btn btn-primary" ng-click="deleteToken(user)">Desloguear</a>
         </td>
     </tr>
 </table>
-<a href="#newUser" class="btn-primary btn-lg nodecoration">Agregar usuario</a>
+<a href="#newUser" class="btn btn-primary">Agregar usuario</a>
