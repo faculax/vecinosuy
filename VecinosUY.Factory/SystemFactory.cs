@@ -22,6 +22,7 @@ namespace VecinosUY.Factory
         private static AnnouncementValidator announcementValidator;
         private static PropertiesValidator propertiesValidator;
         private static MeetingValidator meetingValidator;
+        private static VoteValidator voteValidator;
         private static ILogger logger;
 
         public static UnitOfWork GetUnitOfWofkInstance()
@@ -65,6 +66,15 @@ namespace VecinosUY.Factory
                 buildingValidator = new BuildingValidator(GetUnitOfWofkInstance());
             }
             return buildingValidator;
+        }
+
+        public static VoteValidator GetVoteValidatorInstance()
+        {
+            if (voteValidator == null)
+            {
+                voteValidator = new VoteValidator(GetUnitOfWofkInstance());
+            }
+            return voteValidator;
         }
 
 

@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Vote.cs" />
     <Compile Include="Entities\Meeting.cs" />
     <Compile Include="Entities\Booking.cs" />
     <Compile Include="Entities\Building.cs" />
