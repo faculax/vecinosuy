@@ -18,6 +18,8 @@ namespace VecinosUY.Data.Repository
         IRepository<Meeting> MeetingRepository { get; }
         IRepository<Vote> VoteRepository { get; }
 
+        IRepository<Contact> ContactRepository { get; }
+
         IRepository<Property> PropertyRepository { get; }
 
         ILogger Logger { get; }

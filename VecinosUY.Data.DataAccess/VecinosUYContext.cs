@@ -11,11 +11,10 @@ namespace VecinosUY.Data.DataAccess
         public DbSet<Booking> Bookings  { get; set; }
         public DbSet<FavoriteAdds> FavoriteAdds { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
-
         public DbSet<Vote> Votes { get; set; }
         public DbSet<AccountState> AccountStates { get; set; }
-
         public DbSet<Meeting> Meetings { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
 
         public VecinosUYContext() : base("VecinosUYContext")
         {

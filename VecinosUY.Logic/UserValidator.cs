@@ -101,6 +101,15 @@ namespace VecinosUY.Logic
         {
             unitOfWork.UserRepository.Insert(user);
             unitOfWork.Save();
+
+            //add user as contact
+            Contact contact = new Contact();
+            contact.ContactId = user.UserId;
+            contact.Name = user.Name;
+            contact.Phone = user.Phone;
+            contact.Apartment = "N/A";
+            unitOfWork.ContactRepository.Insert(contact);
+            unitOfWork.Save();
         }
 
 

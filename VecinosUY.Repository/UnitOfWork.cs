@@ -24,6 +24,7 @@ namespace VecinosUY.Data.Repository
         private GenericRepository<FavoriteAdds> favoriteAddsRepository;
         private GenericRepository<Meeting> meetingRepository;
         private GenericRepository<Vote> voteRepository;
+        private GenericRepository<Contact> contactRepository;
         private ILogger logger;
 
         public UnitOfWork(VecinosUYContext VecinosUYContext)
@@ -159,6 +160,18 @@ namespace VecinosUY.Data.Repository
             }
         }
 
+        public IRepository<Contact> ContactRepository
+        {
+            get
+            {
+
+                if (this.contactRepository == null)
+                {
+                    this.contactRepository = new GenericRepository<Contact>(context);
+                }
+                return contactRepository;
+            }
+        }
         public ILogger Logger
         {
             get

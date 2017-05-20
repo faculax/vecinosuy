@@ -23,6 +23,7 @@ namespace VecinosUY.Factory
         private static PropertiesValidator propertiesValidator;
         private static MeetingValidator meetingValidator;
         private static VoteValidator voteValidator;
+        private static ContactValidator contactValidator;
         private static ILogger logger;
 
         public static UnitOfWork GetUnitOfWofkInstance()
