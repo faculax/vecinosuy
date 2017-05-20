@@ -16,23 +16,27 @@
         <TextView android:id="@+id/labelAnnForm"
             android:layout_height="wrap_content" android:layout_width="wrap_content"
             android:layout_gravity="center" android:layout_marginBottom="25dip"
-            android:textSize="24.5sp"  android:text="@string/announcementsForm" />
+            android:textSize="24.5sp"  android:text="@string/announcementsForm"
+            android:textColor="#000066"/>
         <EditText
 
             android:id="@+id/titleTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#000066"
             android:hint="Titulo"/>
         <EditText
 
             android:id="@+id/bodyTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#000066"
             android:hint="Cuerpo"/>
 
-        <Button android:id="@+id/photoBtn" android:layout_height="wrap_content" android:layout_width="wrap_content"
+        <Button android:id="@+id/photoBtn" android:layout_height="25dp" android:layout_width="wrap_content"
             android:layout_gravity="center" android:layout_marginBottom="25dip"
-            android:textSize="24.5sp" android:text="Agregar foto" />
+            android:textSize="20.5sp" android:text="Agregar foto"
+            android:background="#000066" android:textColor="@android:color/white"/>
         <ImageView
             android:id="@+id/annImgView"
             android:layout_width="match_parent"
@@ -41,12 +45,16 @@
         <CheckBox android:id="@+id/checkbox_fav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Favorito"
+            android:layout_gravity="center"
+            android:textColor="#000066"
+            android:buttonTint="#000066"
+            android:text="Agregar como Favorito"
             android:onClick="onCheckboxClicked"/>
 
-        <Button android:id="@+id/submitBtn" android:layout_height="wrap_content" android:layout_width="wrap_content"
+        <Button android:id="@+id/submitBtn" android:layout_height="25dp" android:layout_width="wrap_content"
             android:layout_gravity="center" android:layout_marginBottom="25dip"
-            android:textSize="24.5sp" android:text="Anunciar" />
+            android:textSize="20.5sp" android:text="Anunciar"
+            android:background="#000066" android:textColor="@android:color/white"/>
     </LinearLayout>
 </LinearLayout>
 </ScrollView>
