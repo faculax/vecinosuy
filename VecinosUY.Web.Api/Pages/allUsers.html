@@ -7,11 +7,13 @@
         <tr>
             <td><b>Id de usuario:</b></td>
             <td><b>Nombre:</b></td>
+            <td><b>Tel&eacute;fono:</b></td>
         </tr>
     </thead>
     <tr ng-repeat="user in greeting">
         <td>{{user.UserId}}</td>
-        <td>{{user.Name}}</td>        
+        <td>{{user.Name}}</td> 
+        <td>{{user.Phone}}</td>       
         <td>
             <a class="btn btn-primary" href="#viewUser/{{user.UserId}}">Modificar</a>
             <a class="btn btn-primary" ng-click="deleteUser(user)">Borrar</a>

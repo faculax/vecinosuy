@@ -20,7 +20,8 @@ namespace VecinosUY.Data.Entities
         public Boolean Deleted { get; set; }
         public string Token { get; set; }
         //  public virtual ICollection<Payment> Payments { get; set; }
-
+        [Required]
+        public string Phone { get; set; }
 
         public User()
         {

@@ -95,7 +95,8 @@ namespace VecinosUY.Web.Api.Controllers
                         Name = item.Name,
                         Admin = item.Admin,
                         Deleted = item.Deleted,
-                        Token = item.Token
+                        Token = item.Token,
+                        Phone = item.Phone,
                     };
                     listUserDTO.Add(userDTO);
 
@@ -133,7 +134,8 @@ namespace VecinosUY.Web.Api.Controllers
                     UserId = user.UserId,
                     Name = user.Name,
                     Admin = user.Admin,
-                    Deleted = user.Deleted
+                    Deleted = user.Deleted,
+                    Phone = user.Phone
                 };
                 return Ok(userDTO);
             }

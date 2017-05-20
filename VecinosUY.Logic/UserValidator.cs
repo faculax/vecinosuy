@@ -82,6 +82,7 @@ namespace VecinosUY.Logic
                 oldUser.Deleted = user.Deleted;
                 oldUser.Name = user.Name;
                 oldUser.Token = user.Token;
+                oldUser.Phone = user.Phone;
                 if (user.Password != "*****")
                 {
                     oldUser.Password = user.Password;

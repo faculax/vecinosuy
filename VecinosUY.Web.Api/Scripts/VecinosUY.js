@@ -45,8 +45,6 @@ var VecinosUYApp = angular.module('VecinosUY', ["ngRoute"/*, 'ngMaterial'*/, 'ng
 
 VecinosUYApp.config(function ($routeProvider) {
 
-
-
     $routeProvider
         .when('/allUsers', {
             templateUrl: "Pages/allUsers.html",
@@ -247,7 +245,8 @@ VecinosUYApp
       $scope.addUser = function () {
           var name = $("#nameUser").val();
           var editableName = $("#userEditableName").val();
-          var pass = $("#passUser").val();          
+          var pass = $("#passUser").val();
+          var phone = $("#userPhone").val();
           var admin = $('input:checkbox[name=admin]:checked').val();
           if (admin == "y")
               var adminBool = true;
@@ -264,6 +263,7 @@ VecinosUYApp
                   "UserId" : name,
                   "Name": editableName,
                   "Password": pass,
+                  "Phone": phone,
                   "Admin": adminBool,
               }
           }

@@ -13,6 +13,7 @@ namespace VecinosUY.Data.Entities
         public string Name { get; set; }
         public Boolean Admin { get; set; }
         public Boolean Deleted { get; set; }
+        public string Phone { get; set; }
 
         public string Token { get; set; }
 
