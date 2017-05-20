@@ -23,6 +23,7 @@ namespace VecinosUY.Data.Repository
         private GenericRepository<Booking> bookingRepository;
         private GenericRepository<FavoriteAdds> favoriteAddsRepository;
         private GenericRepository<Meeting> meetingRepository;
+        private GenericRepository<Vote> voteRepository;
         private ILogger logger;
 
         public UnitOfWork(VecinosUYContext VecinosUYContext)
@@ -145,7 +146,18 @@ namespace VecinosUY.Data.Repository
                 return accountStateRepository;
             }
         }
+        public IRepository<Vote> VoteRepository
+        {
+            get
+            {
 
+                if (this.voteRepository == null)
+                {
+                    this.voteRepository = new GenericRepository<Vote>(context);
+                }
+                return voteRepository;
+            }
+        }
 
         public ILogger Logger
         {
