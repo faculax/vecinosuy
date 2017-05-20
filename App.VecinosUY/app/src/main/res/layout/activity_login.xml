@@ -5,30 +5,30 @@
     android:orientation="horizontal">
     <LinearLayout android:orientation="vertical"
         android:layout_height="wrap_content" android:layout_width="fill_parent"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:weightSum="1">
         <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
             android:layout_gravity="center" android:layout_marginBottom="25dip"
-            android:textSize="24.5sp"  android:text="@string/titulo" />
+            android:textSize="24.5sp"  android:text="@string/titulo" android:textColor="#000066"/>
         <ImageView
             android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/vecinos_uy"
-            />
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:src="@mipmap/vecinos_uy_logo" />
         <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
             android:layout_gravity="center" android:layout_marginBottom="25dip"
-            android:textSize="24.5sp" android:text="@string/bienvenido" />
+            android:textSize="24.5sp" android:text="@string/bienvenido" android:textColor="#000066" />
         <TextView android:id="@+id/userMessage"
             android:layout_height="wrap_content" android:layout_width="wrap_content"
             android:layout_gravity="center" android:layout_marginBottom="25dip"
-            android:textSize="24.5sp" android:text="@string/ingrese_codigo_de_activacion" />
+            android:textSize="20.5sp" android:text="@string/ingrese_codigo_de_activacion" android:textColor="#000066"/>
         <EditText
 
             android:id="@+id/passwordTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <Button android:id="@+id/entrarBtn" android:layout_height="wrap_content" android:layout_width="wrap_content"
+        <Button android:id="@+id/entrarBtn" android:layout_height="wrap_content" android:layout_width="120dp"
             android:layout_gravity="center" android:layout_marginBottom="25dip"
-            android:textSize="24.5sp" android:text="@string/entrar" />
+            android:textSize="24.5sp" android:text="@string/entrar" android:background="#000066" android:textColor="@android:color/white"/>
     </LinearLayout>
 </LinearLayout>
