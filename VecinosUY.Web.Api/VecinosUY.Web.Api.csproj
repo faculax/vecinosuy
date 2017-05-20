@@ -168,6 +168,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\VoteController.cs" />
     <Compile Include="Controllers\MeetingController.cs" />
     <Compile Include="Controllers\AccountStateController.cs" />

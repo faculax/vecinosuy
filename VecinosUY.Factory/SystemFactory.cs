@@ -78,6 +78,15 @@ namespace VecinosUY.Factory
             return voteValidator;
         }
 
+        public static ContactValidator GetContactValidatorInstance()
+        {
+            if (contactValidator == null)
+            {
+                contactValidator = new ContactValidator(GetUnitOfWofkInstance());
+            }
+            return contactValidator;
+        }
+
 
         public static ServiceValidator GetServiceValidatorInstance()
         {
