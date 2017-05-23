@@ -74,7 +74,7 @@ namespace VecinosUY.Web.Api.Controllers
             }
             try
             {
-                VoteValidator.secure(Request);
+                VoteValidator.AtmSecure(Request);
                 VoteValidator.PutVote(VoteId, Vote);
             }
             catch (NotAdminException exception)

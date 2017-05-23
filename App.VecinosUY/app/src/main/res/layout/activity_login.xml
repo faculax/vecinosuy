@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:fillViewport="false">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/fondo" android:layout_height="fill_parent"
     android:layout_width="fill_parent" android:padding="30dip"
@@ -32,3 +38,4 @@
             android:textSize="24.5sp" android:text="@string/entrar" android:background="#000066" android:textColor="@android:color/white"/>
     </LinearLayout>
 </LinearLayout>
+</ScrollView>

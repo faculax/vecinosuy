@@ -44,7 +44,22 @@ namespace VecinosUY.Logic
 
         public Vote PutVote(int VoteId, Vote Vote)
         {
-                    
+            Vote.VoteId = VoteId;
+            Vote oldVote = GetVotesById(VoteId);
+            if (oldVote != null)
+            {
+                oldVote.Yes = Vote.Yes;
+                oldVote.Deleted = Vote.Deleted;
+                oldVote.EndDate = Vote.EndDate;
+                oldVote.No = Vote.No;
+                oldVote.YesNoQuestion = Vote.YesNoQuestion;
+                unitOfWork.VoteRepository.Update(oldVote);
+                unitOfWork.Save();
+            }
+            else
+            {
+                throw new NotExistException("El usuario especificado no existe");
+            }
             return Vote;            
         }
 

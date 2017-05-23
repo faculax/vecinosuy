@@ -33,6 +33,7 @@ import java.util.regex.Pattern;
 import logic.AnnouncementContract;
 import logic.AnnouncementDbHelper;
 import logic.Repository;
+import logic.voteDto;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener{
 
@@ -87,39 +88,43 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
 
                     @Override
                     public void onResponse(String response) {
-                       /* JSONArray jsonArray;
-                        ArrayList<String> accountStates = new ArrayList<String>();
+                       JSONArray jsonArray;
+                        ArrayList<String> votes = new ArrayList<String>();
+                        Repository.getInstance().votesRepository.clear();
                         try {
                             jsonArray = new JSONArray(response);
                             for (int i = 0; i< jsonArray.length(); i++) {
                                 JSONObject jsonObject = (JSONObject)jsonArray.get(i);
-                                String month = jsonObject.getString("Month");
-                                String year = jsonObject.getString("Year");
-                                String ammount = jsonObject.getString("Ammount");
-                                accountStates.add(month + "/" + year + " total: " + ammount);
+                                String question = jsonObject.getString("YesNoQuestion");
+                                String yes = jsonObject.getString("Yes");
+                                String id = jsonObject.getString("VoteId");
+                                String no = jsonObject.getString("No");
+                                String endDate = jsonObject.getString("EndDate");
+                                votes.add(id +": " + question +  " SI: "+ yes + " NO: " + no + "\n valido hasta: " + endDate);
+                                voteDto vdto = new voteDto();
+                                vdto.Deleted = false;
+                                vdto.EndDate = endDate;
+                                vdto.No = Integer.parseInt(no);
+                                vdto.VoteId = Integer.parseInt(id);
+                                vdto.Yes = Integer.parseInt(yes);
+                                vdto.YesNoQuestion = question;
+                                Repository.getInstance().votesRepository.put(vdto.VoteId, vdto);
+
                             }
                         } catch (JSONException e) {
                         }
                         catch (Exception e) {
                         }
-                        Intent i = new Intent(getApplicationContext(), AccountStateActivity.class);
-                        Bundle accountStateBundle = new Bundle();
-                        accountStateBundle.putStringArrayList("accountStates", accountStates);
-                        i.putExtras(accountStateBundle);
-                        startActivity(i); */
+                        Intent i = new Intent(getApplicationContext(), VoteActivity.class);
+                        Bundle bundleVotes = new Bundle();
+                        bundleVotes.putStringArrayList("votes", votes);
+                        i.putExtras(bundleVotes);
+                        startActivity(i);
 
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Intent i = new Intent(getApplicationContext(), VoteActivity.class);
-                Bundle voteBundle = new Bundle();
-                ArrayList<String> votes = new ArrayList<String>();
-                votes.add("Perros en el edificio ?");
-                votes.add("Mejora de la azotea ?");
-                voteBundle.putStringArrayList("votes", votes);
-                i.putExtras(voteBundle);
-                startActivity(i);
 
             }
         })
