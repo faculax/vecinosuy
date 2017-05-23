@@ -112,6 +112,11 @@ ul, ol {
 .nav li a:hover {
     background-color:#FFD74A !important;
 }
+
+.nav li a:hover .labelUsu{
+    background: transparent;
+}
+
 .nav li a{
     background-color:#000066 !important;
 }
@@ -192,4 +197,9 @@ a.nodecoration{
 
 .btn-primary btn-lg nodecoration {
     color: #000066;
+}
+
+.loginLabel {
+    min-width: 115px;
+    text-align: left;
 }
