@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="edu.ort.vecinosuy.NewVoteActivity">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/fondo" android:layout_height="fill_parent"
+        android:layout_width="fill_parent" android:padding="30dip"
+        android:orientation="horizontal">
+        <LinearLayout android:orientation="vertical"
+            android:layout_height="wrap_content" android:layout_width="fill_parent"
+            android:layout_gravity="center">
+            <TextView android:id="@+id/newVoteLbl"
+                android:layout_height="wrap_content" android:layout_width="wrap_content"
+                android:layout_gravity="center" android:layout_marginBottom="25dip"
+                android:textSize="24.5sp"  android:text="Nueva votacion:" />
+            <EditText
+
+                android:id="@+id/yesNoQuestionField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Pregunta SI - NO"/>
+
+            <Button android:id="@+id/voteDateBtn" android:layout_height="wrap_content" android:layout_width="wrap_content"
+                android:layout_gravity="center" android:layout_marginBottom="25dip"
+                android:textSize="24.5sp" android:text="Seleccionar fecha" />
+
+            <Button android:id="@+id/newVotePostBtn" android:layout_height="wrap_content" android:layout_width="wrap_content"
+                android:layout_gravity="center" android:layout_marginBottom="25dip"
+                android:textSize="24.5sp" android:text="Iniciar votacion" />
+
+        </LinearLayout>>
+    </LinearLayout>>
+
+</android.support.constraint.ConstraintLayout>

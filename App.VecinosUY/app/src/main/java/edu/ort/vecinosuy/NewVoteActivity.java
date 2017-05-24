@@ -31,70 +31,64 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 
-public class NewMeetingActivity extends AppCompatActivity implements View.OnClickListener {
+public class NewVoteActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_meeting);
+        setContentView(R.layout.activity_new_vote);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        Button v=(Button)this.findViewById(R.id.meetingTimeBtn);
+        Button v=(Button)this.findViewById(R.id.voteDateBtn);
         v.setOnClickListener(this);
-        v=(Button)this.findViewById(R.id.meetingDateBtn);
-        v.setOnClickListener(this);
-        v=(Button)this.findViewById(R.id.scheduleMeetingBtn);
+        v = (Button)this.findViewById(R.id.newVotePostBtn);
         v.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.meetingTimeBtn:
-                showTimePickerDialog(v);
-                //  finish();
+            case R.id.newVotePostBtn:
+                postVote(v);
+    //            //  finish();
                 break;
-            case R.id.meetingDateBtn:
+            case R.id.voteDateBtn:
                 showDatePickerDialog(v);
-                //  finish();
-                break;
-            case R.id.scheduleMeetingBtn:
-                schedule(v);
                 //  finish();
                 break;
         }
 
     }
 
-    private void schedule(View v) {
-        if (Repository.getInstance().validTimeAndDate()) {
-            // interactuar con la web api
-            postMeeting();
+    private void postVote(View v) {
+        if (Repository.getInstance().validDate()) {
+            postVote();
             finish();
 
         } else {
 
             new AlertDialog.Builder(this)
                     .setTitle("Validacion de fechas")
-                    .setMessage("Ingrese fecha y hora antes de continuar")
+                    .setMessage("Ingrese fecha antes de continuar")
                     .setCancelable(true)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
         }
     }
 
-    private void postMeeting(){
-        String serverAddr = getResources().getString(R.string.serverAddr) + "meetings/";
+    private void postVote(){
+        String serverAddr = getResources().getString(R.string.serverAddr) + "votes/";
         RequestQueue queue = Volley.newRequestQueue(this);
         HashMap<String, String> params = new HashMap<String, String>();
-        EditText subjectField   = (EditText)findViewById(R.id.meetingTitle);
-        String subject = subjectField.getText().toString();
-        params.put("Subject", subject);
+        EditText yesNoQuestion   = (EditText)findViewById(R.id.yesNoQuestionField);
+        String question = yesNoQuestion.getText().toString();
+        params.put("YesNoQuestion", question);
         params.put("Deleted", "false");
+        params.put("Yes", "0");
+        params.put("No", "0");
         String date = Repository.getInstance().year + "-" + (Repository.getInstance().month+1) + "-" + Repository.getInstance().day +
-                "T" + Repository.getInstance().hour + ":" + Repository.getInstance().minute + ":00";
-        //params.put("Date", "2016-10-23T11:02:44");
-        params.put("Date", date);
+                "T" + "18" + ":" + "00" + ":00";
+        params.put("EndDate", date);
         JsonObjectRequest request_json = new JsonObjectRequest(serverAddr, new JSONObject(params),
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -135,10 +129,6 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
         return possibleEmail;
     }
 
-    public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getFragmentManager(), "timePicker");
-    }
 
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();

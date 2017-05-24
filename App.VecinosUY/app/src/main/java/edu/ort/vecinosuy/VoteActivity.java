@@ -119,12 +119,8 @@ public class VoteActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.addVoteBtn:
-            /*    Intent i = new Intent(getApplicationContext(), AnnouncementFormActivity.class);
-                Bundle announcementsBoundle = new Bundle();
-                announcementsBoundle.putBoolean("new", true);
-                i.putExtras(announcementsBoundle);
+                Intent i = new Intent(getApplicationContext(), NewVoteActivity.class);
                 startActivity(i);
-                break;*/
         }
     }
 

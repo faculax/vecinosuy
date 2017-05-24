@@ -10,6 +10,7 @@ import java.util.Map;
 public class Repository {
     public Map<Integer,String> announcementBody;
     public Map<Integer,String> announcementImage;
+    public Map<Integer,voteDto> votesRepository;
     public int minute = -1;
     public int hour = -1;
     public int month = -1;
@@ -19,6 +20,7 @@ public class Repository {
     protected Repository() {
         announcementBody = new HashMap<Integer, String>();
         announcementImage = new HashMap<Integer, String>();
+        votesRepository = new HashMap<Integer, voteDto>();
     }
     public static Repository getInstance() {
         if(instance == null) {
@@ -39,6 +41,12 @@ public class Repository {
         return minute != -1 &&
                 hour != -1 &&
                 month != -1 &&
+                year != -1 &&
+                day != -1;
+    }
+
+    public boolean validDate(){
+        return month != -1 &&
                 year != -1 &&
                 day != -1;
     }
