@@ -1,0 +1,25 @@
+<br/>
+<br />
+<br />
+<h3>Trabajar con reservas</h3>
+<table class="table movietable">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Usuario</td>
+			<td>Servicio</td>
+            <td>Desde</td>
+			<td>Hasta</td>
+        </tr>
+    </thead>
+    <tr ng-repeat="booking in greeting">
+        <td>{{booking.BookingId}}</td>
+        <td>{{booking.User}}</td>  
+		<td>{{booking.Service}}</td>
+        <td>{{booking.BookedFrom}}</td> 
+		<td>{{booking.BookedTo}}</td>  		
+        <td>
+            <a class="btn btn-danger" ng-click="deleteBooking(booking)">Borrar</a>
+        </td>
+    </tr>
+</table>

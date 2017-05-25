@@ -50,9 +50,17 @@ VecinosUYApp.config(function ($routeProvider) {
             templateUrl: "Pages/allUsers.html",
             controller: "GetUsers"
         })
+		.when('/allBookings', {
+            templateUrl: "Pages/allBookings.html",
+            controller: "GetBookings"
+        })
 		.when('/allAccountStates', {
             templateUrl: "Pages/allAccountStates.html",
             controller: "GetAccountStates"
+        })
+		.when('/allServices', {
+            templateUrl: "Pages/allServices.html",
+            controller: "GetServices"
         })
         .when('/allAnnouncements', {
             templateUrl: "Pages/allAnnouncements.html",
@@ -69,6 +77,10 @@ VecinosUYApp.config(function ($routeProvider) {
 		.when('/newAccountState', {
             templateUrl: "Pages/newAccountState.html",
             controller: "PostAccountState"
+        })
+		.when('/newService', {
+            templateUrl: "Pages/newService.html",
+            controller: "PostService"
         })
         .when('/newAnnouncement', {
             templateUrl: "Pages/newAnnouncement.html",
@@ -276,6 +288,37 @@ VecinosUYApp
               alert("ERROR: " + JSON.stringify({ data: data.data.Message }));
           });
       }
+  }]).controller('PostService', ['$scope', '$http', '$cookies', /*'$rooScope',*/ function ($scope, $http, $cookies/*, $rooScope*/) {
+      $scope.addService = function () {
+          var id = $("#serviceId").val();
+          var name = $("#serviceName").val();
+		  var building = $("#serviceBuilding").val();
+          idLogueado = $cookies.get('idLogueado');
+          var req = {
+              method: 'POST',
+              url: 'Api/services',
+              headers: {
+                  'TODO_PAGOS_TOKEN': idLogueado
+              },
+              data: {
+                  "ServiceId": id,
+                  "Name": name,
+				  "Building": building
+				   }
+          }
+
+          var res = $http(req).then(function success(data, status, headers, config) {
+              $scope.message = data;
+              // mandar anuncio a android
+           //   notifyAndroid(title);
+
+              //
+              alert("Servicio creado correctamente");
+              window.location.href = '/#/allServices';
+          }, function error(data, status, headers, config) {
+              alert("ERROR: " + JSON.stringify({ data: data.data.Message }));
+          });
+      }
   }]).controller('PostAccountState', ['$scope', '$http', '$cookies', /*'$rooScope',*/ function ($scope, $http, $cookies/*, $rooScope*/) {
       $scope.addAccountState = function () {
           var userId = $("#accountStateUserId").val();
@@ -343,6 +386,48 @@ VecinosUYApp
   }]).controller('Desloguear', ['$scope', '$cookies', function ($scope, $cookies) {
       $cookies.put('idLogueado', '');
 
+  }]).controller('GetBookings', ['$scope', '$http', '$cookies', function ($scope, $http, $cookies) {
+      $scope.get = function () {
+          idLogueado = $cookies.get('idLogueado');
+          var config = {
+              headers: {
+                  'TODO_PAGOS_TOKEN': idLogueado
+              }
+          };
+          $http.get('Api/Bookings/', config,
+                function (response) {
+                    $scope.greeting = response.data;
+                },
+                function (failure) { console.log("Falla :(", failure); }).
+            then(function (response) {
+                $scope.greeting = response.data;
+            }, function (failure) {
+                $scope.greeting = failure.data;
+            });
+      }
+
+      $scope.deleteBooking = function (Booking) {
+          idLogueado = $cookies.get('idLogueado');
+          var req = {
+              method: 'GET',
+              url:  '/Api/bookings/logicdelete/' +Booking.BookingId,
+			 
+              headers: {
+                  'TODO_PAGOS_TOKEN': idLogueado
+              }
+          }
+
+          var res = $http(req).then(function success(data, status, headers, config) {
+              $scope.message = data;
+              $scope.get();
+          }, function error(data, status, headers, config) {
+              alert("ERROR: " + JSON.stringify({ data: data.data.Message }));
+          })
+      }
+
+ 
+      $scope.get();
+
   }]).controller('GetAccountStates', ['$scope', '$http', '$cookies', function ($scope, $http, $cookies) {
       $scope.get = function () {
           idLogueado = $cookies.get('idLogueado');
@@ -382,6 +467,28 @@ VecinosUYApp
           })
       }
 
+ 
+      $scope.get();
+
+  }]).controller('GetServices', ['$scope', '$http', '$cookies', function ($scope, $http, $cookies) {
+      $scope.get = function () {
+          idLogueado = $cookies.get('idLogueado');
+          var config = {
+              headers: {
+                  'TODO_PAGOS_TOKEN': idLogueado
+              }
+          };
+          $http.get('Api/Services/', config,
+                function (response) {
+                    $scope.greeting = response.data;
+                },
+                function (failure) { console.log("Falla :(", failure); }).
+            then(function (response) {
+                $scope.greeting = response.data;
+            }, function (failure) {
+                $scope.greeting = failure.data;
+            });
+      }
  
       $scope.get();
 

@@ -1,0 +1,19 @@
+<br/>
+<br />
+<br />
+<h3>Trabajar con servicios</h3>
+<table class="table movietable">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Nombre</td>
+			<td>Edificio</td>
+        </tr>
+    </thead>
+    <tr ng-repeat="service in greeting">
+        <td>{{service.ServiceId}}</td>
+        <td>{{service.Name}}</td>  
+		<td>{{service.Building}}</td>
+    </tr>
+</table>
+<a href="#newService" class="btn-primary btn-lg nodecoration">Agregar servicio</a>
