@@ -197,6 +197,7 @@ namespace VecinosUY.Data.Repository
             catch (Exception e) {
                 context.AccountStates.Local.Clear();
                 context.Users.Local.Clear();
+                context.Services.Local.Clear();
                 throw e;
             }
 }

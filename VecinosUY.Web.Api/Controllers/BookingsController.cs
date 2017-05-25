@@ -81,39 +81,6 @@ namespace VecinosUY.Web.Api.Controllers
 
         }
 
-        // PUT: api/Bookings/5
-        [ResponseType(typeof(void))]
-        [HttpPut]
-        [Route("api/bookings/{bookingId}")]
-        public IHttpActionResult PutBooking(string bookingId, [FromBody] Booking booking)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            try
-            {
-                bookingValidator.secure(Request);
-                bookingValidator.PutBooking(bookingId, booking);
-            }
-            catch (NotAdminException exception)
-            {
-                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, exception.Mymessage));
-            }
-            catch (NotExistException exception)
-            {
-                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, exception.Mymessage));
-            }
-            catch (System.Data.SqlClient.SqlException)
-            {
-                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "VecinosUY no se puede conectar a la base de datos (∩︵∩)"));
-            }
-            catch (Exception exception)
-            {
-                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exception.Message));
-            }
-            return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.OK, "OK"));
-        }
 
         // POST: api/Bookings
         [ResponseType(typeof(Booking))]
@@ -135,6 +102,10 @@ namespace VecinosUY.Web.Api.Controllers
                 return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, exception.Mymessage));
             }
             catch (NotExistException exception)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, exception.Mymessage));
+            }
+            catch (NotValidBookingException exception)
             {
                 return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, exception.Mymessage));
             }

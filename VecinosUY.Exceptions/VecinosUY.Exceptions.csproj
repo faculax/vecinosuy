@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NotAdminException.cs" />
+    <Compile Include="NotValidBookingException.cs" />
     <Compile Include="NotExistException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

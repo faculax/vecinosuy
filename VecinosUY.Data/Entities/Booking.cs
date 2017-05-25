@@ -10,7 +10,7 @@ namespace VecinosUY.Data.Entities
     public class Booking
     {
         [Key]
-        public string BookingId { get; set; }
+        public int BookingId { get; set; }
         [Required]
         public string User { get; set; }
         [Required]
@@ -21,9 +21,19 @@ namespace VecinosUY.Data.Entities
         [Required]
         public DateTime BookedTo { get; set; }
 
+        [Required]
+        public Boolean Deleted { get; set; }
+
         public Booking()
         {
 
+        }
+
+        public override string ToString()
+        {
+            return "Id: "+ BookingId+" Reserva: " + BookedFrom + " " + BookedTo
+                + " \n Para el servicio " + Service 
+                + "\n Para el usuario " + User;
         }
     }
 }
