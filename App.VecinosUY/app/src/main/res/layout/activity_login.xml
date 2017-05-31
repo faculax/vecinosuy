@@ -27,7 +27,7 @@
         <TextView android:id="@+id/userMessage"
             android:layout_height="wrap_content" android:layout_width="wrap_content"
             android:layout_gravity="center" android:layout_marginBottom="25dip"
-            android:textSize="20.5sp" android:text="@string/ingrese_codigo_de_activacion" android:textColor="#000066"/>
+            android:textSize="16.5sp" android:text="@string/ingrese_codigo_de_activacion" android:textColor="#000066"/>
         <EditText
 
             android:id="@+id/passwordTxt"
