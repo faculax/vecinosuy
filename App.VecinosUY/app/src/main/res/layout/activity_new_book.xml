@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:fillViewport="false">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="edu.ort.vecinosuy.NewBookActivity">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/fondo" android:layout_height="fill_parent"
+        android:layout_width="fill_parent" android:padding="30dip"
+        android:orientation="horizontal">
+    <LinearLayout android:orientation="vertical"
+        android:layout_height="wrap_content" android:layout_width="fill_parent"
+        android:layout_gravity="center">
+        <TextView android:id="@+id/labelAnnForm"
+            android:layout_height="wrap_content" android:layout_width="wrap_content"
+            android:layout_gravity="center" android:layout_marginBottom="25dip"
+            android:textSize="24.5sp"  android:text="Nueva reserva:" />
+
+        <Button android:id="@+id/bookDateBtn" android:layout_height="wrap_content" android:layout_width="wrap_content"
+            android:layout_gravity="center" android:layout_marginBottom="25dip"
+            android:textSize="24.5sp" android:text="Seleccionar fecha" />
+        <Button android:id="@+id/bookTimeBtn" android:layout_height="wrap_content" android:layout_width="wrap_content"
+            android:layout_gravity="center" android:layout_marginBottom="25dip"
+            android:textSize="24.5sp" android:text="Seleccionar hora de inicio" />
+
+        <TextView android:id="@+id/labelAnnForm2"
+            android:layout_height="wrap_content" android:layout_width="wrap_content"
+            android:layout_gravity="center" android:layout_marginBottom="25dip"
+            android:textSize="24.5sp"  android:text="Cantidad de horas:" />
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+      />
+
+        <TextView android:id="@+id/labelAnnForm3"
+            android:layout_height="wrap_content" android:layout_width="wrap_content"
+            android:layout_gravity="center" android:layout_marginBottom="25dip"
+            android:textSize="24.5sp"  android:text="Servicio:" />
+        <Spinner
+            android:id="@+id/servicesSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <Button android:id="@+id/scheduleBookBtn" android:layout_height="wrap_content" android:layout_width="wrap_content"
+            android:layout_gravity="center" android:layout_marginBottom="25dip"
+            android:textSize="24.5sp" android:text="Reservar" />
+
+        </LinearLayout>>
+    </LinearLayout>>
+
+</android.support.constraint.ConstraintLayout>
+</ScrollView>

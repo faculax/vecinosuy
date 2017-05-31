@@ -35,6 +35,11 @@ import logic.AnnouncementDbHelper;
 import logic.Repository;
 import logic.voteDto;
 
+import static android.R.attr.id;
+import static android.R.string.no;
+import static android.R.string.yes;
+import static edu.ort.vecinosuy.R.string.serverAddr;
+
 public class MainActivity extends AppCompatActivity implements OnClickListener{
 
     @Override
@@ -58,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         v.setOnClickListener(this);
         v=(Button)this.findViewById(R.id.voteBtn);
         v.setOnClickListener(this);
+        v=(Button)this.findViewById(R.id.reserveBtn);
+        v.setOnClickListener(this);
 
     }
     @Override
@@ -76,10 +83,109 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
             case R.id.voteBtn:
                 manageVotes();
                 break;
+            case R.id.reserveBtn:
+                loadServices();
+                break;
         }
 
     }
+    private void loadServices() {
+        Repository.getInstance().servicesRepository.clear();
+        String serverAddr = getResources().getString(R.string.serverAddr) + "services";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, serverAddr,
+                new Response.Listener<String>() {
 
+                    @Override
+                    public void onResponse(String response) {
+                        JSONArray jsonArray;
+                        try {
+                            jsonArray = new JSONArray(response);
+                            for (int i = 0; i< jsonArray.length(); i++) {
+                                JSONObject jsonObject = (JSONObject)jsonArray.get(i);
+                                String id = jsonObject.getString ("ServiceId");
+                                Repository.getInstance().servicesRepository.add(id);
+
+                            }
+                        } catch (JSONException e) {}
+                        catch (Exception e) {}
+                        manageBooks();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                String email = getLogedUserEmail();
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("TODO_PAGOS_TOKEN", email);
+                params.put("Content-Type", "application/json");
+
+                return params;
+            }
+        };
+        queue.add(stringRequest);
+    }
+    private void manageBooks() {
+        String serverAddr = getResources().getString(R.string.serverAddr) + "bookings";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, serverAddr,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        JSONArray jsonArray;
+                        ArrayList<String> books = new ArrayList<String>();
+                        try {
+                            jsonArray = new JSONArray(response);
+                            for (int i = 0; i< jsonArray.length(); i++) {
+                                JSONObject jsonObject = (JSONObject)jsonArray.get(i);
+                                String id = jsonObject.getString ("BookingId");
+                                String user = jsonObject.getString ("User");
+                                String service = jsonObject.getString ("Service");
+                                String bookedFrom = jsonObject.getString ("BookedFrom");
+                                String bookedTo = jsonObject.getString ("BookedTo");
+                                String deleted = jsonObject.getString ("Deleted");
+                                books.add(id +": " + user + " " +
+                                        service + " " +
+                                        bookedFrom + " " +
+                                        bookedTo);
+
+                            }
+                        } catch (JSONException e) {
+                        }
+                        catch (Exception e) {
+                        }
+                        Intent i = new Intent(getApplicationContext(), BookActivity.class);
+                        Bundle bundleBooks = new Bundle();
+                        bundleBooks.putStringArrayList("books", books);
+                        i.putExtras(bundleBooks);
+                        startActivity(i);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                String email = getLogedUserEmail();
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("TODO_PAGOS_TOKEN", email);
+                params.put("Content-Type", "application/json");
+
+                return params;
+            }
+        };
+        queue.add(stringRequest);
+    }
     private void manageVotes() {
         String serverAddr = getResources().getString(R.string.serverAddr) + "votes";
         RequestQueue queue = Volley.newRequestQueue(this);
