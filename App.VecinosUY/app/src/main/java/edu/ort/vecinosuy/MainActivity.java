@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -114,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                showToast();
 
             }
         })
@@ -231,7 +233,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                showToast();
             }
         })
         {
@@ -280,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                showToast();
             }
         })
         {
@@ -330,7 +332,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                showToast();
             }
         })
         {
@@ -467,5 +469,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         i.putExtras(announcementsBoundle);
         startActivity(i);
     }
-
+public void showToast(){
+    Toast.makeText(this, R.string.connError, Toast.LENGTH_SHORT).show();
+}
 }
