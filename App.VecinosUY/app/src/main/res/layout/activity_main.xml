@@ -22,24 +22,55 @@
             android:layout_height="wrap_content"
             android:src="@drawable/vecinos_uy"
             />-->
-        <Button android:id="@+id/announcementsBtn" android:layout_height="wrap_content" android:layout_width="300dip"
+        <Button android:id="@+id/announcementsBtn" android:layout_height="wrap_content" android:layout_width="300dp"
+            android:paddingLeft="70dp"
+            android:paddingRight="70dp"
             android:layout_gravity="center" android:layout_marginBottom="15dip"
-            android:textSize="24.5sp" android:text="@string/annauncement" />
-        <Button android:id="@+id/accountStateBtn" android:layout_height="wrap_content" android:layout_width="300dip"
+            android:textSize="18.0sp" android:text="@string/annauncement"
+            android:background="#000066"
+            android:drawableLeft="@drawable/announcements"
+            android:textColor="@android:color/white" />
+        <Button android:id="@+id/accountStateBtn" android:layout_height="wrap_content" android:layout_width="300dp"
+            android:drawableLeft="@drawable/account_statement"
+            android:paddingLeft="70dp"
+            android:paddingRight="70dp"
             android:layout_gravity="center" android:layout_marginBottom="15dip"
-            android:textSize="24.5sp" android:text="Estado de cuenta" />
-        <Button android:id="@+id/mtngsBtn" android:layout_height="wrap_content" android:layout_width="300dip"
+            android:textSize="18.0sp" android:text="Estados de cuenta"
+            android:background="#000066"
+            android:textColor="@android:color/white"/>
+        <Button android:id="@+id/mtngsBtn" android:layout_height="wrap_content" android:layout_width="300dp"
             android:layout_gravity="center" android:layout_marginBottom="15dip"
-            android:textSize="24.5sp" android:text="@string/meeting" />
-        <Button android:id="@+id/voteBtn" android:layout_height="wrap_content" android:layout_width="300dip"
+            android:textSize="18.0sp" android:text="@string/meeting"
+            android:background="#000066"
+            android:textColor="@android:color/white"
+            android:drawableLeft="@drawable/meeting"
+            android:paddingLeft="70dp"
+            android:paddingRight="70dp"/>
+        <Button android:id="@+id/voteBtn" android:layout_height="wrap_content" android:layout_width="300dp"
             android:layout_gravity="center" android:layout_marginBottom="15dip"
-            android:textSize="24.5sp" android:text="@string/vote" />
-        <Button android:id="@+id/reserveBtn" android:layout_height="wrap_content" android:layout_width="300dip"
+            android:textSize="18.0sp" android:text="@string/vote"
+            android:background="#000066"
+            android:textColor="@android:color/white"
+            android:drawableLeft="@drawable/vote"
+            android:paddingLeft="70dp"
+            android:paddingRight="70dp"/>
+        <Button android:id="@+id/reserveBtn" android:layout_height="wrap_content" android:layout_width="300dp"
             android:layout_gravity="center" android:layout_marginBottom="15dip"
-            android:textSize="24.5sp" android:text="@string/reserve" />
-        <Button android:id="@+id/agentaBtn" android:layout_height="wrap_content" android:layout_width="300dip"
+            android:textSize="18.0sp" android:text="@string/reserve"
+            android:background="#000066"
+            android:textColor="@android:color/white"
+            android:drawableLeft="@drawable/bookings"
+            android:paddingLeft="70dp"
+            android:paddingRight="70dp"
+            />
+        <Button android:id="@+id/agentaBtn" android:layout_height="wrap_content" android:layout_width="300dp"
             android:layout_gravity="center" android:layout_marginBottom="15dip"
-            android:textSize="24.5sp" android:text="@string/agenda" />
+            android:textSize="18.0sp" android:text="@string/agenda"
+            android:background="#000066"
+            android:textColor="@android:color/white"
+            android:drawableLeft="@drawable/contacts"
+            android:paddingLeft="70dp"
+            android:paddingRight="70dp"/>
     </LinearLayout>
 </LinearLayout>
 </ScrollView>
