@@ -1,6 +1,8 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,6 +13,7 @@ public class Repository {
     public Map<Integer,String> announcementBody;
     public Map<Integer,String> announcementImage;
     public Map<Integer,voteDto> votesRepository;
+    public List <String> servicesRepository;
     public int minute = -1;
     public int hour = -1;
     public int month = -1;
@@ -21,6 +24,7 @@ public class Repository {
         announcementBody = new HashMap<Integer, String>();
         announcementImage = new HashMap<Integer, String>();
         votesRepository = new HashMap<Integer, voteDto>();
+        servicesRepository = new ArrayList<String>();
     }
     public static Repository getInstance() {
         if(instance == null) {

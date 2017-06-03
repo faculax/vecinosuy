@@ -66,6 +66,8 @@
         <activity android:name=".NewVoteActivity"></activity>
         <activity android:name=".MeetingActivity"></activity>
         <activity android:name=".VoteActivity"></activity>
+        <activity android:name=".NewBookActivity"></activity>
+        <activity android:name=".BookActivity"></activity>
     </application>
 
 </manifest>
