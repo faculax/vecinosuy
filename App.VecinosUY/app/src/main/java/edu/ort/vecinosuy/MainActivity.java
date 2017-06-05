@@ -66,8 +66,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         v.setOnClickListener(this);
         v=(Button)this.findViewById(R.id.reserveBtn);
         v.setOnClickListener(this);
+        v=(Button)this.findViewById(R.id.agentaBtn);
 
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -86,6 +88,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 break;
             case R.id.reserveBtn:
                 loadServices();
+                break;
+            case R.id.agentaBtn:
+                manageContacts();
                 break;
         }
 
@@ -327,6 +332,56 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                         accountStateBundle.putStringArrayList("accountStates", accountStates);
                         i.putExtras(accountStateBundle);
                             startActivity(i);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                showToast();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                String email = getLogedUserEmail();
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("TODO_PAGOS_TOKEN", email);
+                params.put("Content-Type", "application/json");
+
+                return params;
+            }
+        };
+        queue.add(stringRequest);
+    }
+
+    private void manageContacts() {
+        String serverAddr = getResources().getString(R.string.serverAddr) + "contacts";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, serverAddr,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        JSONArray jsonArray;
+                        ArrayList<String> contacts = new ArrayList<String>();
+                        try {
+                            jsonArray = new JSONArray(response);
+                            for (int i = 0; i< jsonArray.length(); i++) {
+                                JSONObject jsonObject = (JSONObject)jsonArray.get(i);
+                                String name = jsonObject.getString("Name");
+                                String phone = jsonObject.getString("Phone");
+                                String apartment = jsonObject.getString("Apartment");
+                                contacts.add(name + " - " + phone + " - Apt: " + apartment);
+                            }
+                        } catch (JSONException e) {
+                        }
+                        catch (Exception e) {
+                        }
+                        Intent i = new Intent(getApplicationContext(), ContactActivity.class);
+                        Bundle contactBundle = new Bundle();
+                        contactBundle.putStringArrayList("contacts", contacts);
+                        i.putExtras(contactBundle);
+                        startActivity(i);
 
                     }
                 }, new Response.ErrorListener() {
