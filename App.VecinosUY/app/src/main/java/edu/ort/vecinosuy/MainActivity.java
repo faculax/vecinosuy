@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         v=(Button)this.findViewById(R.id.reserveBtn);
         v.setOnClickListener(this);
         v=(Button)this.findViewById(R.id.agentaBtn);
-
+        v.setOnClickListener(this);
     }
 
     @Override
