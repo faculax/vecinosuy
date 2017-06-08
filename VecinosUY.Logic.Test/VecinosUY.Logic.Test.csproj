@@ -75,8 +75,15 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AccountStateValidatorTest.cs" />
+    <Compile Include="AnnouncementValidatorTest.cs" />
+    <Compile Include="BookingValidatorTest.cs" />
+    <Compile Include="BuildingValidatorTest.cs" />
+    <Compile Include="ContactValidatorTest.cs" />
+    <Compile Include="MeetingValidatorTest.cs" />
+    <Compile Include="ServiceValidatorTest.cs" />
     <Compile Include="UserValidatorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VoteValidatorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
