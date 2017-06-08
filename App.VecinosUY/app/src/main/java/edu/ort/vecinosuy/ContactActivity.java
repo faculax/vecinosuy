@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.provider.Contacts;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -43,6 +44,21 @@ public class ContactActivity extends AppCompatActivity  {
         final StableArrayAdapter adapter = new StableArrayAdapter(this,
                 android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, final View view,
+                                    int position, long id) {
+                final String item = (String) parent.getItemAtPosition(position);
+                StringTokenizer st = new StringTokenizer(item," - ");
+                String name = st.nextToken();
+                String phone = st.nextToken();
+                Intent addContactIntent = new Intent(Contacts.Intents.Insert.ACTION, Contacts.People.CONTENT_URI);
+                addContactIntent.putExtra(Contacts.Intents.Insert.NAME, name);
+                addContactIntent.putExtra(Contacts.Intents.Insert.PHONE, phone);
+                startActivity(addContactIntent);
+            }
+        });
     }
 
 
