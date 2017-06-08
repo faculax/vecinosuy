@@ -3,6 +3,7 @@ package edu.ort.vecinosuy;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -26,12 +27,17 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
 
 public class NewMeetingActivity extends AppCompatActivity implements View.OnClickListener {
+
+    String subject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +94,7 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
         RequestQueue queue = Volley.newRequestQueue(this);
         HashMap<String, String> params = new HashMap<String, String>();
         EditText subjectField   = (EditText)findViewById(R.id.meetingTitle);
-        String subject = subjectField.getText().toString();
+        subject = subjectField.getText().toString();
         params.put("Subject", subject);
         params.put("Deleted", "false");
         String date = Repository.getInstance().year + "-" + (Repository.getInstance().month+1) + "-" + Repository.getInstance().day +
@@ -99,6 +105,7 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        setEventOnCalendar();
                         finish();
                     }
                 }, new Response.ErrorListener() {
@@ -149,5 +156,74 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    public void setEventOnCalendar(){
+        int month = Repository.getInstance().month;
+        String sMonth = "";
+        if (month<10) {
+            sMonth = "0"+month;
+        } else {
+            sMonth = ""+month;
+        }
+        int day = Repository.getInstance().day;
+        String sday = "";
+        if (day<10) {
+            sday = "0"+day;
+        } else {
+            sday = ""+day;
+        }
+        int hour = Repository.getInstance().hour;
+        String shour = "";
+        if (hour<10) {
+            shour = "0"+hour;
+        } else {
+            shour = ""+hour;
+        }
+        int minute = Repository.getInstance().minute;
+        String sMinute = "";
+        if (minute<10) {
+            sMinute = "0"+minute;
+        } else {
+            sMinute = ""+minute;
+        }
+            java.sql.Timestamp tsStart = java.sql.Timestamp.valueOf(Repository.getInstance().year + "-" +
+                    sMonth+ "-" + sday + " " + shour + ":" + sMinute + ":00");
+            long startTime = tsStart.getTime();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(tsStart);
+            cal.add(Calendar.HOUR_OF_DAY, 1);
+            tsStart.setTime(cal.getTime().getTime()); // or
+            tsStart = new Timestamp(cal.getTime().getTime());
+
+        long endTime = tsStart.getTime();
+
+        Intent intent = new Intent(Intent.ACTION_EDIT);
+        intent.putExtra("calendar_id", 1);
+        intent.setType("vnd.android.cursor.item/event");
+        intent.putExtra("beginTime", startTime);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT |
+                Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.putExtra("allDay", false);
+        intent.putExtra("endTime", endTime);
+        intent.putExtra("title", subject);
+        intent.putExtra("description", subject);
+        startActivity(intent);
+
+
+
+       /* Calendar cal = Calendar.getInstance();
+        Date date = new Date(Repository.getInstance().year,Repository.getInstance().month,Repository.getInstance().day,
+                Repository.getInstance().hour,Repository.getInstance().minute);
+        cal.setTime(date); // sets calendar time/date
+        cal.add(Calendar.HOUR_OF_DAY, 1); // adds one hour
+        Date d = cal.getTime();
+        Intent intent = new Intent(Intent.ACTION_EDIT);
+        intent.setType("vnd.android.cursor.item/event");
+        intent.putExtra("beginTime", date.getTime());
+        intent.putExtra("allDay", false);
+        intent.putExtra("endTime", d.getTime());
+        intent.putExtra("title", subject);
+        startActivity(intent); */
     }
 }
