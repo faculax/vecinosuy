@@ -90,34 +90,6 @@ namespace VecinosUY.Logic.Test
             //Retorna exception
         }
 
-        [TestMethod]
-        public void UpdatesExistingContact()
-        {
-            Contact contact = new Contact
-            {
-                ContactId = "1",
-                Name = "Facu",
-                Phone = "091123456",
-                Apartment = "123"
-            };
-            //Arrange 
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-            mockUnitOfWork
-    .Setup(un => un.ContactRepository.GetByID(It.IsAny<int>()))
-    .Returns(contact);
-
-            //Además, seteamos las expectativas para los métodos que deben llamarse luego
-            mockUnitOfWork.Setup(un => un.ContactRepository.Update(It.IsAny<Contact>()));
-            mockUnitOfWork.Setup(un => un.Save());
-
-            ContactValidator contactValidator = new ContactValidator(mockUnitOfWork.Object);
-
-            //act
-            contactValidator.PutContact("1", contact);
-
-            //Assert
-            mockUnitOfWork.Verify(un => un.ContactRepository.Update(It.IsAny<Contact>()), Times.Exactly(1));
-            mockUnitOfWork.Verify(un => un.Save(), Times.Exactly(1));
-        }
+      
     }
 }

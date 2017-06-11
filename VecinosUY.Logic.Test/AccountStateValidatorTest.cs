@@ -84,57 +84,6 @@ namespace VecinosUY.Logic.Test
 
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(NotExistException))]
-        public void DoesntUpdateNonExistingAccountState()
-        {
-            //Arrange 
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-
-            mockUnitOfWork
-                .Setup(un => un.AccountStateRepository.GetByID(It.IsAny<int>())).Returns(() => null);
-
-            mockUnitOfWork.Setup(un => un.AccountStateRepository.Update(It.IsAny<AccountState>()));
-            //mockUnitOfWork.Setup(un => un.Save());
-
-            IAccountStateValidator accountStateValidator = new AccountStateValidator(mockUnitOfWork.Object);
-
-            //act
-            accountStateValidator.PutAccountState(0, new AccountState() { });
-
-            //Assert
-            //Retorna exception
-        }
-
-        [TestMethod]
-        public void UpdatesExistingAccountState()
-        {
-            AccountState accountState = new AccountState
-            {
-                UserId = "Facu",
-                Month = 10,
-                Year = 2016,
-                Ammount = 1500,
-                Deleted = false
-            };
-            //Arrange 
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-            mockUnitOfWork
-    .Setup(un => un.AccountStateRepository.GetByID(It.IsAny<int>()))
-    .Returns(accountState);
-
-            //Además, seteamos las expectativas para los métodos que deben llamarse luego
-            mockUnitOfWork.Setup(un => un.AccountStateRepository.Update(It.IsAny<AccountState>()));
-            mockUnitOfWork.Setup(un => un.Save());
-
-            AccountStateValidator accountStateValidator = new AccountStateValidator(mockUnitOfWork.Object);
-
-            //act
-            accountStateValidator.PutAccountState(1, accountState);
-
-            //Assert
-            mockUnitOfWork.Verify(un => un.AccountStateRepository.Update(It.IsAny<AccountState>()), Times.Exactly(1));
-            mockUnitOfWork.Verify(un => un.Save(), Times.Exactly(1));
-        }
+       
     }
 }
