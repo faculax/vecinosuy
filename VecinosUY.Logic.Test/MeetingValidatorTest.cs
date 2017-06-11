@@ -68,56 +68,7 @@ namespace VecinosUY.Logic.Test
 
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(NotExistException))]
-        public void DoesntUpdateNonExistingMeeting()
-        {
-            //Arrange 
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-
-            mockUnitOfWork
-                .Setup(un => un.MeetingRepository.GetByID(It.IsAny<int>())).Returns(() => null);
-
-            mockUnitOfWork.Setup(un => un.MeetingRepository.Update(It.IsAny<Meeting>()));
-            //mockUnitOfWork.Setup(un => un.Save());
-
-            IMeetingValidator meetingValidator = new MeetingValidator(mockUnitOfWork.Object);
-
-            //act
-            meetingValidator.PutMeeting(0, new Meeting() { });
-
-            //Assert
-            //Retorna exception
-        }
-
-        [TestMethod]
-        public void UpdatesExistingBooking()
-        {
-            Meeting meeting = new Meeting
-            {
-                MeetingId = 1,
-                Date = new DateTime(2017, 10, 01),
-                Subject = "Subject",
-                Deleted = false
-            };
-            //Arrange 
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-            mockUnitOfWork
-    .Setup(un => un.MeetingRepository.GetByID(It.IsAny<int>()))
-    .Returns(meeting);
-
-            //Además, seteamos las expectativas para los métodos que deben llamarse luego
-            mockUnitOfWork.Setup(un => un.MeetingRepository.Update(It.IsAny<Meeting>()));
-            mockUnitOfWork.Setup(un => un.Save());
-
-            MeetingValidator meetingValidator = new MeetingValidator(mockUnitOfWork.Object);
-
-            //act
-            meetingValidator.PutMeeting(1, meeting);
-
-            //Assert
-            mockUnitOfWork.Verify(un => un.MeetingRepository.Update(It.IsAny<Meeting>()), Times.Exactly(1));
-            mockUnitOfWork.Verify(un => un.Save(), Times.Exactly(1));
-        }
+        
+       
     }
 }

@@ -90,33 +90,5 @@ namespace VecinosUY.Logic.Test
             //Retorna exception
         }
 
-        [TestMethod]
-        public void UpdatesExistingBooking()
-        {
-            Service Service = new Service
-            {
-                ServiceId = "1",
-                Name = "Lavadero",
-                Building = "1"
-            };
-            //Arrange 
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-            mockUnitOfWork
-    .Setup(un => un.ServiceRepository.GetByID(It.IsAny<int>()))
-    .Returns(Service);
-
-            //Además, seteamos las expectativas para los métodos que deben llamarse luego
-            mockUnitOfWork.Setup(un => un.ServiceRepository.Update(It.IsAny<Service>()));
-            mockUnitOfWork.Setup(un => un.Save());
-
-            ServiceValidator ServiceValidator = new ServiceValidator(mockUnitOfWork.Object);
-
-            //act
-            ServiceValidator.PutService("1", Service);
-
-            //Assert
-            mockUnitOfWork.Verify(un => un.ServiceRepository.Update(It.IsAny<Service>()), Times.Exactly(1));
-            mockUnitOfWork.Verify(un => un.Save(), Times.Exactly(1));
-        }
     }
 }
