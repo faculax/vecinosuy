@@ -17,19 +17,25 @@
                 android:layout_gravity="center" android:layout_marginBottom="25dip"
                 android:textSize="24.5sp"  android:text="Nueva votacion:" />
             <EditText
-
+                android:layout_marginBottom="25dip"
                 android:id="@+id/yesNoQuestionField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Pregunta SI - NO"/>
 
             <Button android:id="@+id/voteDateBtn" android:layout_height="wrap_content" android:layout_width="wrap_content"
-                android:layout_gravity="center" android:layout_marginBottom="25dip"
-                android:textSize="24.5sp" android:text="Seleccionar fecha" />
+                android:layout_gravity="center" android:layout_marginBottom="15dip"
+                android:textSize="20.5sp" android:text="Seleccionar fecha"
+                android:background="#000066" android:textColor="@android:color/white"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"/>
 
             <Button android:id="@+id/newVotePostBtn" android:layout_height="wrap_content" android:layout_width="wrap_content"
                 android:layout_gravity="center" android:layout_marginBottom="25dip"
-                android:textSize="24.5sp" android:text="Iniciar votacion" />
+                android:textSize="20.5sp" android:text="Iniciar votacion"
+                android:background="#000066" android:textColor="@android:color/white"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"/>
 
         </LinearLayout>>
     </LinearLayout>>

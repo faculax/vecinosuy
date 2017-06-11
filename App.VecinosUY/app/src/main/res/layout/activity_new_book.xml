@@ -24,35 +24,47 @@
             android:textSize="24.5sp"  android:text="Nueva reserva:" />
 
         <Button android:id="@+id/bookDateBtn" android:layout_height="wrap_content" android:layout_width="wrap_content"
-            android:layout_gravity="center" android:layout_marginBottom="25dip"
-            android:textSize="24.5sp" android:text="Seleccionar fecha" />
+            android:layout_gravity="center" android:layout_marginBottom="15dip"
+            android:textSize="18.5sp" android:text="Seleccionar fecha"
+            android:background="#000066" android:textColor="@android:color/white"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
+
         <Button android:id="@+id/bookTimeBtn" android:layout_height="wrap_content" android:layout_width="wrap_content"
-            android:layout_gravity="center" android:layout_marginBottom="25dip"
-            android:textSize="24.5sp" android:text="Seleccionar hora de inicio" />
+            android:layout_gravity="center" android:layout_marginBottom="15dip"
+            android:textSize="18.5sp" android:text="Seleccionar hora de inicio"
+            android:background="#000066" android:textColor="@android:color/white"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
 
         <TextView android:id="@+id/labelAnnForm2"
             android:layout_height="wrap_content" android:layout_width="wrap_content"
             android:layout_gravity="center" android:layout_marginBottom="25dip"
-            android:textSize="24.5sp"  android:text="Cantidad de horas:" />
+            android:textSize="20.5sp"  android:text="Cantidad de horas:"/>
         <Spinner
             android:id="@+id/spinner1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="15dip"
       />
 
         <TextView android:id="@+id/labelAnnForm3"
             android:layout_height="wrap_content" android:layout_width="wrap_content"
             android:layout_gravity="center" android:layout_marginBottom="25dip"
-            android:textSize="24.5sp"  android:text="Servicio:" />
+            android:textSize="20.5sp"  android:text="Servicio:" />
         <Spinner
             android:id="@+id/servicesSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="15dip"
             />
 
         <Button android:id="@+id/scheduleBookBtn" android:layout_height="wrap_content" android:layout_width="wrap_content"
             android:layout_gravity="center" android:layout_marginBottom="25dip"
-            android:textSize="24.5sp" android:text="Reservar" />
+            android:textSize="20.5sp" android:text="Reservar"
+            android:background="#000066" android:textColor="@android:color/white"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
 
         </LinearLayout>>
     </LinearLayout>>

@@ -21,20 +21,30 @@
             android:id="@+id/meetingTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Asunto"/>
+            android:hint="Asunto"
+            android:layout_marginBottom="25dip"/>
 
 
         <Button android:id="@+id/meetingTimeBtn" android:layout_height="wrap_content" android:layout_width="wrap_content"
-            android:layout_gravity="center" android:layout_marginBottom="25dip"
-            android:textSize="24.5sp" android:text="Seleccionar hora" />
+            android:layout_gravity="center" android:layout_marginBottom="15dip"
+            android:textSize="20.5sp" android:text="Seleccionar hora"
+            android:background="#000066" android:textColor="@android:color/white"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
 
         <Button android:id="@+id/meetingDateBtn" android:layout_height="wrap_content" android:layout_width="wrap_content"
-            android:layout_gravity="center" android:layout_marginBottom="25dip"
-            android:textSize="24.5sp" android:text="Seleccionar fecha" />
+            android:layout_gravity="center" android:layout_marginBottom="15dip"
+            android:textSize="20.5sp" android:text="Seleccionar fecha"
+            android:background="#000066" android:textColor="@android:color/white"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
 
         <Button android:id="@+id/scheduleMeetingBtn" android:layout_height="wrap_content" android:layout_width="wrap_content"
-            android:layout_gravity="center" android:layout_marginBottom="25dip"
-            android:textSize="24.5sp" android:text="Agendar" />
+            android:layout_gravity="center" android:layout_marginBottom="15dip"
+            android:textSize="20.5sp" android:text="Agendar"
+            android:background="#000066" android:textColor="@android:color/white"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
 
         </LinearLayout>>
     </LinearLayout>>

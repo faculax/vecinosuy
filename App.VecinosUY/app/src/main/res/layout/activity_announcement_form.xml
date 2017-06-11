@@ -10,12 +10,13 @@
     android:background="@color/fondo" android:layout_height="fill_parent"
     android:layout_width="fill_parent" android:padding="30dip"
     android:orientation="horizontal">
+
     <LinearLayout android:orientation="vertical"
         android:layout_height="wrap_content" android:layout_width="fill_parent"
         android:layout_gravity="center">
         <TextView android:id="@+id/labelAnnForm"
             android:layout_height="wrap_content" android:layout_width="wrap_content"
-            android:layout_gravity="center" android:layout_marginBottom="25dip"
+            android:layout_gravity="center" android:layout_marginBottom="20dip"
             android:textSize="24.5sp"  android:text="@string/announcementsForm"
             android:textColor="#000066"/>
         <EditText
@@ -31,12 +32,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#000066"
+            android:layout_marginBottom="10dip"
             android:hint="Cuerpo"/>
 
         <Button android:id="@+id/photoBtn" android:layout_height="25dp" android:layout_width="wrap_content"
-            android:layout_gravity="center" android:layout_marginBottom="25dip"
+            android:layout_gravity="center" android:layout_marginBottom="10dip"
             android:textSize="20.5sp" android:text="Agregar foto"
-            android:background="#000066" android:textColor="@android:color/white"/>
+            android:background="#000066" android:textColor="@android:color/white"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
         <ImageView
             android:id="@+id/annImgView"
             android:layout_width="match_parent"
@@ -49,12 +53,15 @@
             android:textColor="#000066"
             android:buttonTint="#000066"
             android:text="Agregar como Favorito"
+            android:layout_marginBottom="10dip"
             android:onClick="onCheckboxClicked"/>
 
         <Button android:id="@+id/submitBtn" android:layout_height="25dp" android:layout_width="wrap_content"
             android:layout_gravity="center" android:layout_marginBottom="25dip"
             android:textSize="20.5sp" android:text="Anunciar"
-            android:background="#000066" android:textColor="@android:color/white"/>
+            android:background="#000066" android:textColor="@android:color/white"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
     </LinearLayout>
 </LinearLayout>
 </ScrollView>

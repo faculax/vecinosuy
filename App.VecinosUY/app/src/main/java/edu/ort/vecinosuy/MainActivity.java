@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                                 String id = jsonObject.getString("VoteId");
                                 String no = jsonObject.getString("No");
                                 String endDate = jsonObject.getString("EndDate");
-                                votes.add(id +": " + question +  " SI: "+ yes + " NO: " + no + "\n valido hasta: " + endDate);
+                                votes.add(id +": " + question +  " SI: "+ yes + " NO: " + no + "\n válido hasta: " + endDate);
                                 voteDto vdto = new voteDto();
                                 vdto.Deleted = false;
                                 vdto.EndDate = endDate;
@@ -321,7 +321,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                                 String month = jsonObject.getString("Month");
                                 String year = jsonObject.getString("Year");
                                 String ammount = jsonObject.getString("Ammount");
-                                accountStates.add(month + "/" + year + " total: " + ammount);
+                                accountStates.add("Fecha: "+ month + "/" + year + " Total: $" + ammount);
                             }
                         } catch (JSONException e) {
                         }
