@@ -90,34 +90,6 @@ namespace VecinosUY.Logic.Test
             //Retorna exception
         }
 
-        [TestMethod]
-        public void UpdatesExistingBuilding()
-        {
-            Building building = new Building
-            {
-                BuildingId = "1",
-                Name = "Facu",
-                Address = "Address",
-                Admin = "1"
-            };
-            //Arrange 
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-            mockUnitOfWork
-    .Setup(un => un.BuildingRepository.GetByID(It.IsAny<int>()))
-    .Returns(building);
-
-            //Además, seteamos las expectativas para los métodos que deben llamarse luego
-            mockUnitOfWork.Setup(un => un.BuildingRepository.Update(It.IsAny<Building>()));
-            mockUnitOfWork.Setup(un => un.Save());
-
-            BuildingValidator buildingValidator = new BuildingValidator(mockUnitOfWork.Object);
-
-            //act
-            buildingValidator.PutBuilding("1", building);
-
-            //Assert
-            mockUnitOfWork.Verify(un => un.BuildingRepository.Update(It.IsAny<Building>()), Times.Exactly(1));
-            mockUnitOfWork.Verify(un => un.Save(), Times.Exactly(1));
-        }
+     
     }
 }

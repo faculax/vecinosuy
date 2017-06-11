@@ -48,25 +48,7 @@ namespace VecinosUY.Logic.Test
         }
 
 
-        [TestMethod]
-        public void CreateBookingTest()
-        {
-            //Arrange
-            //Creo el mock object del unitOfWork
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-            //Esperamos que se llame al método Insert del Repository con un Booking y luego al Save();
-            mockUnitOfWork.Setup(un => un.BookingRepository.Insert(It.IsAny<Booking>()));
-            mockUnitOfWork.Setup(un => un.Save());
-
-            BookingValidator bookingValidator = new BookingValidator(mockUnitOfWork.Object);
-
-            //Act
-            bookingValidator.PostBooking(new Booking());
-
-            //Assert
-            mockUnitOfWork.VerifyAll();
-
-        }
+       
 
         [TestMethod]
         [ExpectedException(typeof(NotExistException))]
@@ -90,35 +72,6 @@ namespace VecinosUY.Logic.Test
             //Retorna exception
         }
 
-        [TestMethod]
-        public void UpdatesExistingBooking()
-        {
-            Booking booking = new Booking
-            {
-                BookingId = 1,
-                User = "1",
-                Service = "1",
-                BookedFrom = new DateTime(2017, 10, 01),
-                BookedTo = new DateTime(2017, 10, 02)
-            };
-            //Arrange 
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-            mockUnitOfWork
-    .Setup(un => un.BookingRepository.GetByID(It.IsAny<int>()))
-    .Returns(booking);
-
-            //Además, seteamos las expectativas para los métodos que deben llamarse luego
-            mockUnitOfWork.Setup(un => un.BookingRepository.Update(It.IsAny<Booking>()));
-            mockUnitOfWork.Setup(un => un.Save());
-
-            BookingValidator bookingValidator = new BookingValidator(mockUnitOfWork.Object);
-
-            //act
-            bookingValidator.PutBooking("1", booking);
-
-            //Assert
-            mockUnitOfWork.Verify(un => un.BookingRepository.Update(It.IsAny<Booking>()), Times.Exactly(1));
-            mockUnitOfWork.Verify(un => un.Save(), Times.Exactly(1));
-        }
+        
     }
 }

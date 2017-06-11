@@ -47,25 +47,8 @@ namespace VecinosUY.Logic.Test
             //mockUnitOfWork.VerifyAll();
         }
 
-        [TestMethod]
-        public void CreateUserTest()
-        {
-            //Arrange
-            //Creo el mock object del unitOfWork
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-            //Esperamos que se llame al método Insert del userRepository con un Usuario y luego al Save();
-            mockUnitOfWork.Setup(un => un.UserRepository.Insert(It.IsAny<User>()));
-            mockUnitOfWork.Setup(un => un.Save());
-
-            UserValidator userValidator = new UserValidator(mockUnitOfWork.Object);
-
-            //Act
-            userValidator.PostUser(new User());
-
-            //Assert
-            mockUnitOfWork.VerifyAll();
-
-        }
+       
+        
         [TestMethod]
         [ExpectedException(typeof(NotExistException))]
         public void DoesntUpdateNonExistingUser()
@@ -88,35 +71,6 @@ namespace VecinosUY.Logic.Test
             //Retorna exception
         }
 
-        [TestMethod]
-        public void UpdatesExistingUser()
-        {
-            User user = new User
-            {
-                Name = "Luis",
-                Admin = true,
-                Deleted = false,
-                Password = "luis",
-                UserId = "1"
-            };
-            //Arrange 
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-                        mockUnitOfWork
-                .Setup(un => un.UserRepository.GetByID(It.IsAny<int>()))
-                .Returns(user);
-
-            //Además, seteamos las expectativas para los métodos que deben llamarse luego
-            mockUnitOfWork.Setup(un => un.UserRepository.Update(It.IsAny<User>()));
-            mockUnitOfWork.Setup(un => un.Save());
-
-            UserValidator userValidator = new UserValidator(mockUnitOfWork.Object);
-
-            //act
-            userValidator.PutUser("1",user);
-
-            //Assert
-            mockUnitOfWork.Verify(un => un.UserRepository.Update(It.IsAny<User>()), Times.Exactly(1));
-            mockUnitOfWork.Verify(un => un.Save(), Times.Exactly(1));            
-        }
+       
     }
 }

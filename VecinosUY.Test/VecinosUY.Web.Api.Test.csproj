@@ -91,8 +91,16 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UserTest.cs" />
+    <Compile Include="AccountStateControllerTest.cs" />
+    <Compile Include="AnnouncementsControllerTest.cs" />
+    <Compile Include="BookingsControllerTest.cs" />
+    <Compile Include="BuildingsControllerTest.cs" />
+    <Compile Include="ContactControllerTest.cs" />
+    <Compile Include="MeetingControllerTest.cs" />
+    <Compile Include="ServicesControllerTest.cs" />
+    <Compile Include="UserControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VoteControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VecinosUY.Data\VecinosUY.Data.csproj">
