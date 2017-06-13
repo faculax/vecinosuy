@@ -86,7 +86,7 @@ public class NewVoteActivity extends AppCompatActivity implements View.OnClickLi
         params.put("Deleted", "false");
         params.put("Yes", "0");
         params.put("No", "0");
-        String date = Repository.getInstance().year + "-" + (Repository.getInstance().month+1) + "-" + Repository.getInstance().day +
+        String date = Repository.getInstance().getYear() + "-" + (Repository.getInstance().getMonth()) + "-" + Repository.getInstance().getDay() +
                 "T" + "18" + ":" + "00" + ":00";
         params.put("EndDate", date);
         JsonObjectRequest request_json = new JsonObjectRequest(serverAddr, new JSONObject(params),

@@ -97,8 +97,8 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
         subject = subjectField.getText().toString();
         params.put("Subject", subject);
         params.put("Deleted", "false");
-        String date = Repository.getInstance().year + "-" + (Repository.getInstance().month+1) + "-" + Repository.getInstance().day +
-                "T" + Repository.getInstance().hour + ":" + Repository.getInstance().minute + ":00";
+        String date = Repository.getInstance().getYear() + "-" + (Repository.getInstance().getMonth()) + "-" + Repository.getInstance().getDay() +
+                "T" + Repository.getInstance().getHour() + ":" + Repository.getInstance().getMinute() + ":00";
         //params.put("Date", "2016-10-23T11:02:44");
         params.put("Date", date);
         JsonObjectRequest request_json = new JsonObjectRequest(serverAddr, new JSONObject(params),
@@ -159,36 +159,9 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void setEventOnCalendar(){
-        int month = Repository.getInstance().month;
-        String sMonth = "";
-        if (month<10) {
-            sMonth = "0"+month;
-        } else {
-            sMonth = ""+month;
-        }
-        int day = Repository.getInstance().day;
-        String sday = "";
-        if (day<10) {
-            sday = "0"+day;
-        } else {
-            sday = ""+day;
-        }
-        int hour = Repository.getInstance().hour;
-        String shour = "";
-        if (hour<10) {
-            shour = "0"+hour;
-        } else {
-            shour = ""+hour;
-        }
-        int minute = Repository.getInstance().minute;
-        String sMinute = "";
-        if (minute<10) {
-            sMinute = "0"+minute;
-        } else {
-            sMinute = ""+minute;
-        }
-            java.sql.Timestamp tsStart = java.sql.Timestamp.valueOf(Repository.getInstance().year + "-" +
-                    sMonth+ "-" + sday + " " + shour + ":" + sMinute + ":00");
+            java.sql.Timestamp tsStart = java.sql.Timestamp.valueOf(Repository.getInstance().getYear() + "-" +
+                    Repository.getInstance().getMonth()+ "-" + Repository.getInstance().getDay() + " "
+                    + Repository.getInstance().getHour() + ":" + Repository.getInstance().getMinute() + ":00");
             long startTime = tsStart.getTime();
             Calendar cal = Calendar.getInstance();
             cal.setTime(tsStart);

@@ -129,11 +129,11 @@ public class NewBookActivity extends AppCompatActivity implements View.OnClickLi
         spinner1 = (Spinner) findViewById(R.id.spinner1);
         String hours = (String)spinner1.getSelectedItem();
         String service = (String)servicesSpinner.getSelectedItem();
-        Date d = new Date(Repository.getInstance().year,
-                Repository.getInstance().month,
-                Repository.getInstance().day,
-                Repository.getInstance().hour,
-                Repository.getInstance().minute);
+        Date d = new Date(Integer.parseInt(Repository.getInstance().getYear()),
+                Integer.parseInt(Repository.getInstance().getMonth()),
+                        Integer.parseInt(Repository.getInstance().getDay()),
+                                Integer.parseInt(Repository.getInstance().getHour()),
+                                        Integer.parseInt(Repository.getInstance().getMinute()));
         Calendar cal = Calendar.getInstance(); // creates calendar
         cal.setTime(d); // sets calendar time/date
         cal.add(Calendar.HOUR_OF_DAY, Integer.parseInt(hours)); // adds one hour
@@ -143,8 +143,8 @@ public class NewBookActivity extends AppCompatActivity implements View.OnClickLi
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("User", getLogedUserEmail());
         params.put("Service", service);
-        String date = Repository.getInstance().year + "-" + (Repository.getInstance().month+1) + "-" + Repository.getInstance().day +
-                "T" + Repository.getInstance().hour + ":" + Repository.getInstance().minute + ":00";
+        String date = Repository.getInstance().getYear() + "-" + Repository.getInstance().getMonth() + "-" + Repository.getInstance().getDay() +
+                "T" + Repository.getInstance().getHour() + ":" + Repository.getInstance().getMinute() + ":00";
         params.put("BookedFrom", date);
         int monthTo = d.getMonth()+1;
         String dateTo = d.getYear() + "-" + monthTo + "-" + d.getDate() +

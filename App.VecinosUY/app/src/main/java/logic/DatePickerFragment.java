@@ -27,8 +27,8 @@ public class DatePickerFragment extends DialogFragment
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        Repository.getInstance().year = year;
-        Repository.getInstance().month = month;
-        Repository.getInstance().day = day;
+        Repository.getInstance().setYear(year);
+        Repository.getInstance().setMonth(month);
+        Repository.getInstance().setDay(day);
     }
 }

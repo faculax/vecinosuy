@@ -29,7 +29,7 @@ public  class TimePickerFragment extends DialogFragment
     }
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        Repository.getInstance().hour = hourOfDay;
-        Repository.getInstance().minute = minute;
+        Repository.getInstance().setHour(hourOfDay);
+        Repository.getInstance().setMinute(minute);
     }
 }
