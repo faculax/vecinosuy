@@ -1,0 +1,49 @@
+ /*DATOS DE PRUEBA*/
+ 
+ USE VecinosUYDB;
+ 
+ /*USERS*/
+ INSERT INTO Users (UserId, Name, Password, Admin, Deleted, Token, Phone) VALUES ('faculax@hotmail.com', 'Facundo Laxalde', 'qwe123', 1, 0, NULL, '091 123 456');
+ INSERT INTO Users (UserId, Name, Password, Admin, Deleted, Token, Phone) VALUES ('franciscagalperin@gmail.com', 'Francisca Galperin', '123qwe', 0, 0, 'ABC', '091 111 111');
+ INSERT INTO Users (UserId, Name, Password, Admin, Deleted, Token, Phone) VALUES ('luda@gmail.com', 'Lucia Davila', '123qwe', 0, 0, 'DEF', '091 999 999');
+ 
+ /*BUILDINGS*/
+ INSERT INTO Buildings (BuildingId, Name, Address, Admin) VALUES ('LPALM', 'Las Palmas', 'Benito Lamas 2706A', 'Fran');
+ INSERT INTO Buildings (BuildingId, Name, Address, Admin) VALUES ('LPARK', 'Lago Park', 'Juan Paullier 1013', 'Facu');
+ INSERT INTO Buildings (BuildingId, Name, Address, Admin) VALUES ('A21', 'Angel 21', 'Williman 576', 'Luda');
+ 
+ /*SERVICES*/
+ INSERT INTO Services (ServiceId, Name, Building) VALUES ('Barbacoa', 'Barbacoa 10mo Piso0', 'LPALM');
+ INSERT INTO Services (ServiceId, Name, Building) VALUES ('Lavadero', 'Lavadero Comunitario', 'LPALM');
+ 
+ /*ACCOUNT STATES*/
+ INSERT INTO AccountStates (UserId, Month, Year, Ammount, Deleted) VALUES ('Fran', 1, 2017, 1500, 0);
+ INSERT INTO AccountStates (UserId, Month, Year, Ammount, Deleted) VALUES ('Fran', 2, 2017, 1750, 0);
+ INSERT INTO AccountStates (UserId, Month, Year, Ammount, Deleted) VALUES ('Fran', 3, 2017, 2500, 0);
+ INSERT INTO AccountStates (UserId, Month, Year, Ammount, Deleted) VALUES ('Fran', 4, 2017, 2000, 0);
+ 
+ /*ANNOUNCEMENT*/
+ INSERT INTO Announcements (Title, Body, Deleted, Image) VALUES ('Se vende guitarra', 'Se vende guitarra usada a $1500', 0, NULL);
+ INSERT INTO Announcements (Title, Body, Deleted, Image) VALUES ('Perros en adopcion', 'Tienen un mes, consultar en el apto 102', 0, NULL);
+ INSERT INTO Announcements (Title, Body, Deleted, Image) VALUES ('Corte de Luz', '4/7 de 15 a 19hrs', 0, NULL);
+ INSERT INTO Announcements (Title, Body, Deleted, Image) VALUES ('Se encontro billetera en el Hall', 'De cuero negra sin documentos', 0, NULL);
+ 
+ /*BOOKINGS*/
+ INSERT INTO [dbo].[Bookings] ([User],[Service],[BookedFrom],[BookedTo],[Deleted]) VALUES ('franciscagalperin@gmail.com','Barbacoa','2017-07-01 22:00' ,'2017-07-01 23:00',0);
+ INSERT INTO [dbo].[Bookings] ([User],[Service],[BookedFrom],[BookedTo],[Deleted]) VALUES ('franciscagalperin@gmail.com','Lavadero','2017-07-01 13:00' ,'2017-07-01 14:00',0);
+ 
+ /*CONTACTS*/
+  INSERT INTO Contacts (ContactId, Name, Phone, Apartment) VALUES ('faculax@hotmail.com', 'Facundo Laxalde', '091 123 456', '204');
+  INSERT INTO Contacts (ContactId, Name, Phone, Apartment) VALUES ('franciscagalperin@gmail.com', 'Francisca Galperin', '091 111 111', '123');
+  INSERT INTO Contacts (ContactId, Name, Phone, Apartment) VALUES ('ludavila@gmail.com', 'Lucia Davila', '091 12 12 12', '503');
+  
+  /*MEETINGS*/
+  INSERT INTO Meetings (Date, Subject, Deleted) VALUES ('2017-07-15 19:00', 'Reunion de Propietarios', 0);
+  INSERT INTO Meetings (Date, Subject, Deleted) VALUES ('2017-07-28 15:00', 'Reunion Mensual', 0);
+  
+  /*VOTES*/
+  INSERT INTO VOTES (EndDate, YesNoQuestion, Deleted, Yes, No) VALUES ('2017-07-01 22:00', 'Se aceptan mascotas?', 0, 3, 1);
+  INSERT INTO VOTES (EndDate, YesNoQuestion, Deleted, Yes, No) VALUES ('2017-07-20 22:00', 'Contratamos una nueva limpiadora?', 0, 0, 2);
+  
+  
+  
