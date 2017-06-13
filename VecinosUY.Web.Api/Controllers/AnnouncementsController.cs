@@ -165,7 +165,7 @@ namespace VecinosUY.Web.Api.Controllers
             try
             {
                 announcementValidator.PostAnnouncement(announcement);
-                notifyAndroidUsers(announcement.Title);
+                notifyAndroidUsers(announcement.Title, true);
 
             }
             catch (NotAdminException exception)
@@ -228,7 +228,7 @@ namespace VecinosUY.Web.Api.Controllers
 
 
 
-        private void notifyAndroidUsers(string title)
+        public static void notifyAndroidUsers(string title, Boolean admin)
         {
             try
             {
@@ -236,8 +236,15 @@ namespace VecinosUY.Web.Api.Controllers
                 HttpClient client = new HttpClient();
                 string RestUrl = "https://fcm.googleapis.com/fcm/send";
                 jsonNotification jsn = new jsonNotification();
-                jsn.body = title;
-                jsn.title = "El admin anuncio:";
+                if (admin)
+                {
+                    jsn.body = title;
+                    jsn.title = "El admin anuncio:";
+                }
+                else {
+                    jsn.body = "ver reuniones...";
+                    jsn.title = "Nueva reunion:";
+                }
                 jsonFirebaseRequest jfr = new jsonFirebaseRequest();
                 jfr.to = "/topics/allDevices";
                 jfr.notification = jsn;

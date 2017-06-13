@@ -109,6 +109,7 @@ namespace VecinosUY.Web.Api.Controllers
             try
             {
                 MeetingValidator.PostMeeting(Meeting);
+                AnnouncementsController.notifyAndroidUsers("", false);
             }
             catch (NotAdminException exception)
             {
