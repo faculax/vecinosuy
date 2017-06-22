@@ -3,10 +3,11 @@
  USE VecinosUYDB;
  
  /*USERS*/
- INSERT INTO Users (UserId, Name, Password, Admin, Deleted, Token, Phone) VALUES ('faculax@hotmail.com', 'Facundo Laxalde', 'qwe123', 1, 0, NULL, '091 123 456');
+  INSERT INTO Users (UserId, Name, Password, Admin, Deleted, Token, Phone) VALUES ('Admin', 'Administrador', 'qwe123', 1, 0, NULL, '091 123 456');
+ INSERT INTO Users (UserId, Name, Password, Admin, Deleted, Token, Phone) VALUES ('faculax@hotmail.com', 'Facundo Laxalde', 'qwe123', 0, 0, '123', '091 123 456');
  INSERT INTO Users (UserId, Name, Password, Admin, Deleted, Token, Phone) VALUES ('franciscagalperin@gmail.com', 'Francisca Galperin', '123qwe', 0, 0, 'ABC', '091 111 111');
  INSERT INTO Users (UserId, Name, Password, Admin, Deleted, Token, Phone) VALUES ('luda@gmail.com', 'Lucia Davila', '123qwe', 0, 0, 'DEF', '091 999 999');
- 
+ 11
  /*BUILDINGS*/
  INSERT INTO Buildings (BuildingId, Name, Address, Admin) VALUES ('LPALM', 'Las Palmas', 'Benito Lamas 2706A', 'Fran');
  INSERT INTO Buildings (BuildingId, Name, Address, Admin) VALUES ('LPARK', 'Lago Park', 'Juan Paullier 1013', 'Facu');

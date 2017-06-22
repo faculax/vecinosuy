@@ -12,23 +12,7 @@ namespace VecinosUY.Logic.Test
     [TestClass]
     public class VoteValidatorTest
     {
-        [TestMethod]
-        public void GetAllVotesFromRepositoryTest()
-        {
-            //Arrange
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-
-            mockUnitOfWork.Setup(x => x.VoteRepository.Get(null, null, ""));
-
-            VoteValidator VoteValidator = new VoteValidator(mockUnitOfWork.Object);
-
-            ////Act
-            IEnumerable<Vote> returnedVote = VoteValidator.GetVotes();
-
-            ////Assert
-            mockUnitOfWork.VerifyAll();
-        }
-
+       
         [TestMethod]
         [ExpectedException(typeof(NotExistException))]
         public void GetVoteById()

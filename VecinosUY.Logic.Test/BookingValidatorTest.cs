@@ -12,22 +12,6 @@ namespace VecinosUY.Logic.Test
     [TestClass]
     public class BookingValidatorTest
     {
-        [TestMethod]
-        public void GetAllBookingsFromRepositoryTest()
-        {
-            //Arrange
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-
-            mockUnitOfWork.Setup(x => x.BookingRepository.Get(null, null, ""));
-
-            BookingValidator bookingValidator = new BookingValidator(mockUnitOfWork.Object);
-
-            ////Act
-            IEnumerable<Booking> returnedBooking = bookingValidator.GetBookings();
-
-            ////Assert
-            mockUnitOfWork.VerifyAll();
-        }
 
         [TestMethod]
         [ExpectedException(typeof(NotExistException))]

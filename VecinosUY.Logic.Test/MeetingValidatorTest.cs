@@ -12,22 +12,7 @@ namespace VecinosUY.Logic.Test
     [TestClass]
     public class MeetingValidatorTest
     {
-        [TestMethod]
-        public void GetAllMeetingsFromRepositoryTest()
-        {
-            //Arrange
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-
-            mockUnitOfWork.Setup(x => x.MeetingRepository.Get(null, null, ""));
-
-            MeetingValidator meetingValidator = new MeetingValidator(mockUnitOfWork.Object);
-
-            ////Act
-            IEnumerable<Meeting> returnedMeeting = meetingValidator.GetMeetings();
-
-            ////Assert
-            mockUnitOfWork.VerifyAll();
-        }
+       
 
         [TestMethod]
         [ExpectedException(typeof(NotExistException))]

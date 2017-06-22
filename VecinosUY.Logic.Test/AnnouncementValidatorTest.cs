@@ -13,23 +13,6 @@ namespace VecinosUY.Logic.Test
     public class AnnouncementValidatorTest
     {
         [TestMethod]
-        public void GetAllAnnouncementFromRepositoryTest()
-        {
-            //Arrange
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-
-            mockUnitOfWork.Setup(x => x.AccountStateRepository.Get(null, null, ""));
-
-            AnnouncementValidator announcementValidator = new AnnouncementValidator(mockUnitOfWork.Object);
-
-            ////Act
-            IEnumerable<Announcement> returnedAnnouncement = announcementValidator.GetAnnouncements();
-
-            ////Assert
-            mockUnitOfWork.VerifyAll();
-        }
-
-        [TestMethod]
         [ExpectedException(typeof(NotExistException))]
         public void GetAnnouncementById()
         {

@@ -12,22 +12,7 @@ namespace VecinosUY.Logic.Test
     [TestClass]
     public class UserValidatorTest
     {
-        [TestMethod]
-        public void GetAllUsersFromRepositoryTest()
-        {
-            //Arrange
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-
-            mockUnitOfWork.Setup(x => x.UserRepository.Get(null, null, ""));
-
-            UserValidator userValidator = new UserValidator(mockUnitOfWork.Object);
-
-            ////Act
-            IEnumerable<User> returnedUsers = userValidator.GetUsers();
-
-            ////Assert
-            mockUnitOfWork.VerifyAll();
-        }
+        
 
         [TestMethod]
         [ExpectedException(typeof(NotExistException))]
